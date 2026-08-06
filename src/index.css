@@ -1,0 +1,61 @@
+:root {
+  --ink: #0a1628;
+  --ink-soft: #243447;
+  --mist: #e8eef4;
+  --mist-deep: #d2dde8;
+  --paper: #f4f7fa;
+  --accent: #e85d04;
+  --accent-deep: #c24a00;
+  --line: color-mix(in srgb, var(--ink) 12%, transparent);
+  --shadow: 0 24px 60px color-mix(in srgb, var(--ink) 10%, transparent);
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-body: 'Figtree', system-ui, sans-serif;
+  --max: 72rem;
+  color: var(--ink);
+  background: var(--mist);
+  font-family: var(--font-body);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--accent-deep);
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+.button {
+  font: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
