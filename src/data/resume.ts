@@ -14,32 +14,63 @@ export const profile = {
 export const skillGroups = [
   {
     label: 'Frontend',
-    items:
-      'React 19, Next.js App Router, TypeScript (strict), Vite, Tailwind design tokens, URL-as-state, design-system-first UI',
+    items: [
+      'React 19',
+      'Next.js App Router',
+      'TypeScript (strict)',
+      'Vite',
+      'Tailwind design tokens',
+      'URL-as-state',
+      'Design-system-first UI',
+    ],
   },
   {
     label: 'Backend',
-    items:
-      '.NET BFF patterns, Java/Spring search services, OpenAPI / contract-first FE↔BE, stored-procedure → API migrations',
+    items: [
+      '.NET BFF patterns',
+      'Java/Spring search',
+      'OpenAPI / contract-first',
+      'SP → API migrations',
+    ],
   },
   {
     label: 'Quality',
-    items:
-      'Vitest / React Testing Library, Playwright (discipline), coverage gates, static analysis, behavior locks',
+    items: [
+      'Vitest / RTL',
+      'Playwright discipline',
+      'Coverage gates',
+      'Static analysis',
+      'Behavior locks',
+    ],
   },
   {
     label: 'Platform',
-    items:
-      'Kubernetes ingress, Octopus Deploy, Dependabot, structured logging / Dynatrace',
+    items: [
+      'Kubernetes ingress',
+      'Octopus Deploy',
+      'Dependabot',
+      'Dynatrace / structured logs',
+    ],
   },
   {
     label: 'AI-native engineering',
-    items:
-      'Cursor skills-as-product, MCP, agent orchestration, evals / landmines-as-assertions, AGENTS.md, human-in-the-loop gates',
+    items: [
+      'Cursor skills-as-product',
+      'MCP',
+      'Agent orchestration',
+      'Evals / landmines',
+      'AGENTS.md',
+      'Human-in-the-loop gates',
+    ],
   },
   {
     label: 'Product',
-    items: 'Search / discovery, A/B experiments, feature flags, marketplace UX',
+    items: [
+      'Search / discovery',
+      'A/B experiments',
+      'Feature flags',
+      'Marketplace UX',
+    ],
   },
 ]
 

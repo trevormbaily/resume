@@ -2,7 +2,7 @@
 
 Public-safe resume site for GitHub Pages. Content mirrors the Hudl FE Platform draft in `trevor-os` (`knowledge-vault/Career/`) with employer product codenames stripped.
 
-**Stack signal:** Vite + React + TypeScript — the same FE stack the Frontend Platform role lists.
+**Stack signal:** Vite + React + TypeScript + Tailwind + shadcn/ui — the same FE stack Frontend Platform roles ship.
 
 ## Recommendation: GitHub Pages (public `resume` repo)
 
@@ -20,14 +20,13 @@ Repo already created: https://github.com/trevormbaily/resume
 Cloud agents cannot push there (`cursor[bot]` 403). On a machine where `gh` is **you** (`trevormbaily`):
 
 ```bash
-# from a checkout that has sites/resume (PR #31 or main after merge)
+# from a checkout that has sites/resume (PR #35 or main after merge)
 cd sites/resume
 chmod +x scripts/ship-public-repo.sh
-./scripts/ship-public-repo.sh --existing
+./scripts/ship-public-repo.sh --update
 ```
 
-Then once: **Settings → Pages → Source: GitHub Actions**  
-→ https://github.com/trevormbaily/resume/settings/pages
+Then Pages rebuilds via Actions → https://trevormbaily.github.io/resume/
 
 ## Local
 
