@@ -8,7 +8,7 @@ export const profile = {
   headline:
     'Senior full-stack engineer who migrates high-traffic discovery experiences and builds AI-native engineering systems that make teams faster without lowering the quality bar.',
   support:
-    'Vite, React, TypeScript, and platform craft — vertical ownership from UI through BFF, search, and delivery.',
+    'Frontend platform craft — Vite, React, TypeScript, design-system-backed UI, and vertical ownership from interface through BFF, search, and delivery.',
 }
 
 export const skillGroups = [
@@ -19,6 +19,7 @@ export const skillGroups = [
       'Next.js App Router',
       'TypeScript (strict)',
       'Vite',
+      'Three.js / R3F',
       'Tailwind design tokens',
       'URL-as-state',
       'Design-system-first UI',

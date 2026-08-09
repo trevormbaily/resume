@@ -2,7 +2,7 @@
 
 Public-safe resume site for GitHub Pages. Content mirrors the Hudl FE Platform draft in `trevor-os` (`knowledge-vault/Career/`) with employer product codenames stripped.
 
-**Stack signal:** Vite + React + TypeScript + Tailwind + shadcn/ui — the same FE stack Frontend Platform roles ship.
+**Stack signal:** Vite + React + TypeScript + Three.js (R3F) + Tailwind + shadcn/ui.
 
 ## Recommendation: GitHub Pages (public `resume` repo)
 
