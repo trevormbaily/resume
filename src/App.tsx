@@ -54,7 +54,7 @@ export default function App() {
                 className="bg-[var(--accent-signal)] text-white hover:bg-[var(--accent-signal-hover)]"
                 render={<a href="#experience" />}
               >
-                See experience
+                See the work
               </Button>
               <Button
                 size="lg"
@@ -103,7 +103,7 @@ export default function App() {
           <SectionHeading
             title="Skills"
             titleId="skills-title"
-            description="Tools and patterns claimed with evidence — frontend platform craft plus AI-native force multiplication."
+            description="What I reach for day to day — frontend platforms, delivery, and AI-assisted engineering."
           />
 
           <div className="grid gap-8 sm:grid-cols-2">
@@ -140,7 +140,7 @@ export default function App() {
           <SectionHeading
             title="Experience"
             titleId="experience-title"
-            description="End-to-end product work across UI, BFF, search, and delivery — with quality systems that survive review."
+            description="Product work from the interface through services and deploy — with reviews and tests that hold up."
           />
 
           <div className="flex flex-col gap-12">

@@ -6,9 +6,9 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/trevor-baily24',
   linkedinLabel: 'linkedin.com/in/trevor-baily24',
   headline:
-    'Senior full-stack engineer who migrates high-traffic discovery experiences and builds AI-native engineering systems that make teams faster without lowering the quality bar.',
+    'Senior engineer who rebuilds high-traffic search experiences and builds AI tooling that helps teams move faster without cutting corners.',
   support:
-    'Frontend platform craft — Vite, React, TypeScript, design-system-backed UI, and vertical ownership from interface through BFF, search, and delivery.',
+    'Most at home in React, TypeScript, and Vite — owning the path from UI through BFF, search, and production.',
 }
 
 export const skillGroups = [
@@ -20,28 +20,28 @@ export const skillGroups = [
       'TypeScript (strict)',
       'Vite',
       'Three.js / R3F',
-      'Tailwind design tokens',
-      'URL-as-state',
-      'Design-system-first UI',
+      'Tailwind',
+      'Design systems',
+      'URL-driven state',
     ],
   },
   {
     label: 'Backend',
     items: [
-      '.NET BFF patterns',
-      'Java/Spring search',
-      'OpenAPI / contract-first',
-      'SP → API migrations',
+      '.NET BFFs',
+      'Java / Spring search',
+      'OpenAPI contracts',
+      'Stored proc → API migrations',
     ],
   },
   {
     label: 'Quality',
     items: [
-      'Vitest / RTL',
-      'Playwright discipline',
+      'Vitest / Testing Library',
+      'Playwright',
       'Coverage gates',
       'Static analysis',
-      'Behavior locks',
+      'Regression locks',
     ],
   },
   {
@@ -54,20 +54,20 @@ export const skillGroups = [
     ],
   },
   {
-    label: 'AI-native engineering',
+    label: 'AI-assisted engineering',
     items: [
-      'Cursor skills-as-product',
+      'Cursor skills',
       'MCP',
-      'Agent orchestration',
-      'Evals / landmines',
+      'Agent workflows',
+      'Evals',
       'AGENTS.md',
-      'Human-in-the-loop gates',
+      'Human review gates',
     ],
   },
   {
     label: 'Product',
     items: [
-      'Search / discovery',
+      'Search & discovery',
       'A/B experiments',
       'Feature flags',
       'Marketplace UX',
@@ -91,13 +91,13 @@ export const roles: Role[] = [
       { title: 'Software Development Engineer', dates: 'May 2022 – Oct 2024' },
     ],
     bullets: [
-      'Own marketplace search / discovery end-to-end: Next.js / React UI → .NET BFF → Java/Spring search gateway → Kubernetes ingress / Octopus deploy — vertical ownership, not single-layer tickets.',
-      'Lead legacy → Next.js App Router migrations with 1:1 behavior parity as the spec; design-system-first (tokens); URL-as-state for shareable, history-correct search.',
-      'Keep BFF transforms; UI does not reshape — contract-first FE↔BE with identical contracts in parallel PRs, mock-first UI, and CI contract tests.',
-      'Ship quality under migration pressure: unit-first pyramid (Vitest/RTL), Playwright only where a real browser/BFF proves value, coverage gates as product decisions, behavior-locks tied to tickets.',
-      'Build AI-native engineering systems that industrialize the SDLC: thin skill routers, composable ticket→implement→test pipelines, human gates before side effects, MCP/agent orchestration, evals.',
-      'Cross-repo craft: blast-radius mapping before coding, own vs contract-only shared modules, release-impact thinking, Dependabot as backlog, observability QA can block on.',
-      'Earlier tenure foundations: payments integration (ahead of schedule); Spring Boot + legacy Java; Gatling performance testing; Datadog / Dynatrace; shared component library → Next.js / TypeScript surfaces.',
+      'Own marketplace search end to end — React/Next UI, .NET BFF, Java search services, and the deploy path. I take the whole vertical, not just a ticket in one layer.',
+      'Lead legacy → Next.js App Router migrations with behavior parity as the bar. Design tokens and URL state keep search shareable and history-correct.',
+      'Keep data shaping in the BFF so the UI stays thin. Contract-first FE/BE work, mock-first UI, and contract tests in CI.',
+      'Protect quality during migrations: Vitest/Testing Library first, Playwright when a real browser earns its keep, and coverage gates treated as product decisions — not theater.',
+      'Build AI-assisted engineering workflows teams can reuse — skills, ticket-to-implement pipelines, and human approval before anything with side effects.',
+      'Work carefully across shared repos: map blast radius before coding, know what we own vs. what we only consume, and keep observability clear enough that QA can block on it.',
+      'Earlier at ATG: shipped a payments integration ahead of schedule, Spring Boot and legacy Java, Gatling performance work, and moved a shared component library onto Next.js / TypeScript.',
     ],
   },
   {
@@ -105,11 +105,11 @@ export const roles: Role[] = [
     location: '',
     titles: [{ title: 'Senior Frontend Developer', dates: 'Jul 2017 – May 2022' }],
     bullets: [
-      'Modernized the front end of an enterprise monolith (1.5M+ LOC) with Vue.js, Vuetify, Tailwind, Pinia — better UX and meaningfully lower page load times.',
-      'Sole front-end resource who took a state-based product from idea → production in under 6 months (requirements through design and implementation).',
-      'Led Struts 1 → Struts 2 migration as PM + developer with limited knowledge transfer; rolled out to all clients on time and under budget.',
-      'Moved dependency management from manual ANT to Maven; cross-referenced security vulnerabilities and updated libraries.',
-      'Built consumer-facing web presence that increased exposure and supported acquisition of the state-based product; integrated JasperSoft / HighCharts for embedded BI.',
+      'Modernized the frontend of a large enterprise monolith (1.5M+ LOC) with Vue.js, Vuetify, Tailwind, and Pinia — clearer UX and meaningfully faster page loads.',
+      'Was the sole frontend engineer who took a state-based product from idea to production in under six months, including requirements and design.',
+      'Led a Struts 1 → Struts 2 migration as both PM and developer with thin knowledge transfer, and rolled it out to all clients on time and under budget.',
+      'Moved dependency management from manual ANT builds to Maven, including security reviews and library upgrades.',
+      'Built the consumer-facing web presence that helped grow exposure and support acquisition of the product; added JasperSoft / HighCharts for embedded reporting.',
     ],
   },
 ]
@@ -118,5 +118,5 @@ export const education = {
   school: 'University of Nebraska–Lincoln',
   dates: '2012 – 2016',
   degree: 'Bachelor of Business Administration (B.B.A.), Finance',
-  note: 'Self-taught software engineering via mentors + structured platforms → professional web application development.',
+  note: 'Picked up software engineering through mentors and deliberate practice, then moved into professional web development.',
 }
