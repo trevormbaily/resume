@@ -2,16 +2,34 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   BufferGeometry,
+  CanvasTexture,
   Color,
   Float32BufferAttribute,
+  SRGBColorSpace,
   type Group,
   type PerspectiveCamera,
+  type Texture,
 } from 'three'
 
 const SLATE = '#14181f'
 const GRID = '#2a3442'
 const EMERALD = '#0b6e4f'
-const MUTED = '#5a6575'
+
+const TECH_LOGOS = [
+  { slug: 'react', label: 'React' },
+  { slug: 'typescript', label: 'TypeScript' },
+  { slug: 'vite', label: 'Vite' },
+  { slug: 'nextdotjs', label: 'Next.js' },
+  { slug: 'tailwindcss', label: 'Tailwind' },
+  { slug: 'threedotjs', label: 'Three.js' },
+  { slug: 'vuedotjs', label: 'Vue' },
+  { slug: 'dotnet', label: '.NET' },
+  { slug: 'spring', label: 'Spring' },
+  { slug: 'nodedotjs', label: 'Node.js' },
+  { slug: 'kubernetes', label: 'Kubernetes' },
+  { slug: 'openapiinitiative', label: 'OpenAPI' },
+  { slug: 'github', label: 'GitHub' },
+] as const
 
 function useHeroVisible(element: HTMLElement | null) {
   const [inView, setInView] = useState(true)
@@ -47,6 +65,55 @@ function seeded(n: number) {
   return x - Math.floor(x)
 }
 
+function useLogoTextures(slugs: readonly string[]) {
+  const [textures, setTextures] = useState<Record<string, Texture>>({})
+
+  useEffect(() => {
+    let cancelled = false
+    const loaded: Record<string, Texture> = {}
+
+    Promise.all(
+      slugs.map(
+        (slug) =>
+          new Promise<void>((resolve) => {
+            const img = new Image()
+            img.decoding = 'async'
+            img.onload = () => {
+              const size = 256
+              const canvas = document.createElement('canvas')
+              canvas.width = size
+              canvas.height = size
+              const ctx = canvas.getContext('2d')
+              if (!ctx) {
+                resolve()
+                return
+              }
+              ctx.clearRect(0, 0, size, size)
+              const pad = 28
+              ctx.drawImage(img, pad, pad, size - pad * 2, size - pad * 2)
+              const texture = new CanvasTexture(canvas)
+              texture.colorSpace = SRGBColorSpace
+              texture.needsUpdate = true
+              loaded[slug] = texture
+              resolve()
+            }
+            img.onerror = () => resolve()
+            img.src = `./logos/${slug}.svg`
+          }),
+      ),
+    ).then(() => {
+      if (!cancelled) setTextures(loaded)
+    })
+
+    return () => {
+      cancelled = true
+      Object.values(loaded).forEach((texture) => texture.dispose())
+    }
+  }, [slugs])
+
+  return textures
+}
+
 function ChartFloor() {
   const positions = useMemo(() => {
     const lines: number[] = []
@@ -60,7 +127,7 @@ function ChartFloor() {
   }, [])
 
   return (
-    <lineSegments rotation={[0, 0, 0]} position={[0, -1.35, 0]}>
+    <lineSegments position={[0, -1.35, 0]}>
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
@@ -76,15 +143,15 @@ function PriceRibbon({ animate }: { animate: boolean }) {
   useFrame((state) => {
     const t = animate ? state.clock.elapsedTime : 0
     const pts: number[] = []
-    let y = 0.35
+    let y = 0.55
     for (let i = 0; i < pointCount; i += 1) {
       const x = -9 + (i / (pointCount - 1)) * 18
       const drift =
-        Math.sin(i * 0.18 + t * 0.55) * 0.55 +
-        Math.sin(i * 0.07 + t * 0.22) * 0.35 +
-        seeded(i + 3) * 0.12
+        Math.sin(i * 0.18 + t * 0.55) * 0.45 +
+        Math.sin(i * 0.07 + t * 0.22) * 0.28 +
+        seeded(i + 3) * 0.1
       y = y * 0.86 + drift * 0.42
-      pts.push(x, y, -0.2)
+      pts.push(x, y + 1.15, -0.35)
     }
     geo.setAttribute('position', new Float32BufferAttribute(pts, 3))
   })
@@ -92,67 +159,72 @@ function PriceRibbon({ animate }: { animate: boolean }) {
   return (
     <line>
       <primitive object={geo} attach="geometry" />
-      <lineBasicMaterial color={EMERALD} transparent opacity={0.9} />
+      <lineBasicMaterial color={EMERALD} transparent opacity={0.75} />
     </line>
   )
 }
 
-type Candle = {
-  x: number
-  open: number
-  close: number
-  high: number
-  low: number
-  up: boolean
-}
-
-function Candlesticks({ animate }: { animate: boolean }) {
+function LogoCandles({
+  animate,
+  textures,
+}: {
+  animate: boolean
+  textures: Record<string, Texture>
+}) {
   const groupRef = useRef<Group>(null)
 
-  const candles = useMemo<Candle[]>(() => {
-    const list: Candle[] = []
-    let price = 0.2
-    for (let i = 0; i < 22; i += 1) {
-      const open = price
-      const delta = (seeded(i * 17.3) - 0.45) * 0.9
-      const close = open + delta
-      const high = Math.max(open, close) + seeded(i * 9.1) * 0.25
-      const low = Math.min(open, close) - seeded(i * 5.7) * 0.25
-      list.push({
-        x: -8.5 + i * 0.78,
-        open,
-        close,
-        high,
-        low,
-        up: close >= open,
-      })
-      price = close
-    }
-    return list
+  const items = useMemo(() => {
+    return TECH_LOGOS.map((logo, i) => {
+      const height = 0.55 + seeded(i * 13.7) * 1.35
+      return {
+        ...logo,
+        x: -8.2 + i * 1.28,
+        height,
+        phase: seeded(i * 4.2) * Math.PI * 2,
+      }
+    })
   }, [])
 
   useFrame((state) => {
     if (!groupRef.current || !animate) return
     const t = state.clock.elapsedTime
     groupRef.current.position.y = Math.sin(t * 0.35) * 0.04
+    groupRef.current.children.forEach((child, i) => {
+      const item = items[i]
+      if (!item) return
+      const bob = Math.sin(t * 0.9 + item.phase) * 0.06
+      child.position.y = bob
+      child.rotation.y = Math.sin(t * 0.45 + item.phase) * 0.15
+    })
   })
 
   return (
-    <group ref={groupRef} position={[0, -0.15, 0.4]}>
-      {candles.map((c) => {
-        const bodyH = Math.max(0.08, Math.abs(c.close - c.open))
-        const bodyY = (c.open + c.close) / 2
-        const wickH = Math.max(0.08, c.high - c.low)
-        const color = c.up ? EMERALD : MUTED
+    <group ref={groupRef} position={[0, -0.2, 0.55]}>
+      {items.map((item) => {
+        const texture = textures[item.slug]
+        const stemH = item.height
         return (
-          <group key={c.x} position={[c.x, 0, 0]}>
-            <mesh position={[0, (c.high + c.low) / 2, 0]}>
-              <boxGeometry args={[0.035, wickH, 0.035]} />
-              <meshBasicMaterial color={color} transparent opacity={0.55} />
+          <group key={item.slug} position={[item.x, 0, 0]}>
+            <mesh position={[0, stemH / 2 - 1.2, 0]}>
+              <boxGeometry args={[0.08, stemH, 0.08]} />
+              <meshBasicMaterial color={EMERALD} transparent opacity={0.35} />
             </mesh>
-            <mesh position={[0, bodyY, 0.02]}>
-              <boxGeometry args={[0.28, bodyH, 0.12]} />
-              <meshBasicMaterial color={color} transparent opacity={0.78} />
+            <mesh position={[0, stemH - 0.85, 0.12]}>
+              <planeGeometry args={[0.72, 0.72]} />
+              {texture ? (
+                <meshBasicMaterial map={texture} transparent depthWrite={false} />
+              ) : (
+                <meshBasicMaterial color={new Color(EMERALD)} transparent opacity={0.5} />
+              )}
+            </mesh>
+            {/* back face so logos read from both sides while the scene drifts */}
+            <mesh position={[0, stemH - 0.85, 0.11]} rotation={[0, Math.PI, 0]}>
+              <planeGeometry args={[0.72, 0.72]} />
+              {texture ? (
+                <meshBasicMaterial map={texture} transparent depthWrite={false} />
+              ) : (
+                <meshBasicMaterial color={new Color(EMERALD)} transparent opacity={0.5} />
+              )}
             </mesh>
           </group>
         )
@@ -161,45 +233,12 @@ function Candlesticks({ animate }: { animate: boolean }) {
   )
 }
 
-function VolumeBars({ animate }: { animate: boolean }) {
-  const bars = useMemo(() => {
-    return Array.from({ length: 28 }, (_, i) => ({
-      x: -9 + i * 0.65,
-      h: 0.2 + seeded(i * 11.2) * 1.1,
-      phase: seeded(i * 3.4) * Math.PI * 2,
-    }))
-  }, [])
-
-  const groupRef = useRef<Group>(null)
-
-  useFrame((state) => {
-    if (!groupRef.current || !animate) return
-    const t = state.clock.elapsedTime
-    groupRef.current.children.forEach((child, i) => {
-      const bar = bars[i]
-      if (!bar) return
-      const scaleY = 0.55 + Math.sin(t * 0.7 + bar.phase) * 0.25
-      child.scale.y = Math.max(0.2, bar.h * scaleY)
-      child.position.y = -1.35 + child.scale.y / 2
-    })
-  })
-
-  return (
-    <group ref={groupRef}>
-      {bars.map((bar) => (
-        <mesh key={bar.x} position={[bar.x, -1.0, 1.2]}>
-          <boxGeometry args={[0.28, 1, 0.28]} />
-          <meshBasicMaterial color={new Color(EMERALD)} transparent opacity={0.18} />
-        </mesh>
-      ))}
-    </group>
-  )
-}
-
 function MarketScene({ animate }: { animate: boolean }) {
   const rootRef = useRef<Group>(null)
   const pointer = useRef({ x: 0, y: 0 })
   const { camera, gl } = useThree()
+  const slugs = useMemo(() => TECH_LOGOS.map((logo) => logo.slug), [])
+  const textures = useLogoTextures(slugs)
 
   useEffect(() => {
     const el = gl.domElement
@@ -231,9 +270,8 @@ function MarketScene({ animate }: { animate: boolean }) {
   return (
     <group ref={rootRef} rotation={[-0.38, 0.22, 0.04]} position={[0.4, 0.2, 0]}>
       <ChartFloor />
-      <Candlesticks animate={animate} />
+      <LogoCandles animate={animate} textures={textures} />
       <PriceRibbon animate={animate} />
-      <VolumeBars animate={animate} />
     </group>
   )
 }
