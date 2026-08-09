@@ -2,48 +2,14 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   BufferGeometry,
-  DoubleSide,
   Float32BufferAttribute,
   type Group,
   type PerspectiveCamera,
-  SRGBColorSpace,
-  Texture,
-  TextureLoader,
 } from 'three'
-
-import logoDotnet from '@/assets/logos/dotnet.png'
-import logoGithub from '@/assets/logos/github.png'
-import logoKubernetes from '@/assets/logos/kubernetes.png'
-import logoNext from '@/assets/logos/nextdotjs.png'
-import logoNode from '@/assets/logos/nodedotjs.png'
-import logoOpenapi from '@/assets/logos/openapiinitiative.png'
-import logoReact from '@/assets/logos/react.png'
-import logoSpring from '@/assets/logos/spring.png'
-import logoTailwind from '@/assets/logos/tailwindcss.png'
-import logoThree from '@/assets/logos/threedotjs.png'
-import logoTypescript from '@/assets/logos/typescript.png'
-import logoVite from '@/assets/logos/vite.png'
-import logoVue from '@/assets/logos/vuedotjs.png'
 
 const SLATE = '#14181f'
 const GRID = '#2a3442'
 const EMERALD = '#0b6e4f'
-
-const TECH_LOGOS = [
-  { slug: 'react', src: logoReact },
-  { slug: 'typescript', src: logoTypescript },
-  { slug: 'vite', src: logoVite },
-  { slug: 'nextdotjs', src: logoNext },
-  { slug: 'tailwindcss', src: logoTailwind },
-  { slug: 'threedotjs', src: logoThree },
-  { slug: 'vuedotjs', src: logoVue },
-  { slug: 'dotnet', src: logoDotnet },
-  { slug: 'spring', src: logoSpring },
-  { slug: 'nodedotjs', src: logoNode },
-  { slug: 'kubernetes', src: logoKubernetes },
-  { slug: 'openapiinitiative', src: logoOpenapi },
-  { slug: 'github', src: logoGithub },
-] as const
 
 function useHeroVisible(element: HTMLElement | null) {
   const [inView, setInView] = useState(true)
@@ -77,45 +43,6 @@ function useHeroVisible(element: HTMLElement | null) {
 function seeded(n: number) {
   const x = Math.sin(n * 127.1) * 43758.5453
   return x - Math.floor(x)
-}
-
-function useLogoTextures() {
-  const [textures, setTextures] = useState<(Texture | null)[]>(
-    () => TECH_LOGOS.map(() => null),
-  )
-
-  useEffect(() => {
-    const loader = new TextureLoader()
-    let cancelled = false
-    const next: (Texture | null)[] = TECH_LOGOS.map(() => null)
-
-    TECH_LOGOS.forEach((logo, index) => {
-      loader.load(
-        logo.src,
-        (texture) => {
-          if (cancelled) {
-            texture.dispose()
-            return
-          }
-          texture.colorSpace = SRGBColorSpace
-          texture.needsUpdate = true
-          next[index] = texture
-          setTextures([...next])
-        },
-        undefined,
-        () => {
-          if (!cancelled) setTextures([...next])
-        },
-      )
-    })
-
-    return () => {
-      cancelled = true
-      next.forEach((texture) => texture?.dispose())
-    }
-  }, [])
-
-  return textures
 }
 
 function ChartFloor() {
@@ -155,7 +82,7 @@ function PriceRibbon({ animate }: { animate: boolean }) {
         Math.sin(i * 0.07 + t * 0.22) * 0.28 +
         seeded(i + 3) * 0.1
       y = y * 0.86 + drift * 0.42
-      pts.push(x, y + 1.35, -0.55)
+      pts.push(x, y + 0.85, -0.35)
     }
     geo.setAttribute('position', new Float32BufferAttribute(pts, 3))
   })
@@ -168,92 +95,10 @@ function PriceRibbon({ animate }: { animate: boolean }) {
   )
 }
 
-function LogoPillar({
-  index,
-  animate,
-  texture,
-}: {
-  index: number
-  animate: boolean
-  texture: Texture | null
-}) {
-  const groupRef = useRef<Group>(null)
-
-  const count = TECH_LOGOS.length
-  const spacing = 1.05
-  const height = 0.85 + seeded(index * 13.7) * 1.1
-  const x = -((count - 1) * spacing) / 2 + index * spacing
-  const phase = seeded(index * 4.2) * Math.PI * 2
-
-  useFrame((state) => {
-    if (!groupRef.current) return
-    const t = animate ? state.clock.elapsedTime : 0
-    groupRef.current.position.y = Math.sin(t * 0.9 + phase) * 0.05
-  })
-
-  return (
-    <group ref={groupRef} position={[x, -0.15, 0.5]}>
-      <mesh position={[0, height / 2, 0]}>
-        <boxGeometry args={[0.12, height, 0.12]} />
-        <meshBasicMaterial color={EMERALD} transparent opacity={0.45} toneMapped={false} />
-      </mesh>
-
-      <group position={[0, height + 0.3, 0.1]}>
-        <mesh position={[0, 0, -0.02]}>
-          <circleGeometry args={[0.52, 32]} />
-          <meshBasicMaterial color="#101821" transparent opacity={0.96} toneMapped={false} />
-        </mesh>
-        <mesh>
-          <planeGeometry args={[0.82, 0.82]} />
-          {texture ? (
-            <meshBasicMaterial
-              map={texture}
-              transparent
-              depthWrite={false}
-              toneMapped={false}
-              side={DoubleSide}
-            />
-          ) : (
-            <meshBasicMaterial
-              color={EMERALD}
-              transparent
-              opacity={0.55}
-              toneMapped={false}
-              side={DoubleSide}
-            />
-          )}
-        </mesh>
-      </group>
-    </group>
-  )
-}
-
-function LogoCandles({
-  animate,
-  textures,
-}: {
-  animate: boolean
-  textures: (Texture | null)[]
-}) {
-  return (
-    <group>
-      {TECH_LOGOS.map((logo, index) => (
-        <LogoPillar
-          key={logo.slug}
-          index={index}
-          animate={animate}
-          texture={textures[index] ?? null}
-        />
-      ))}
-    </group>
-  )
-}
-
 function MarketScene({ animate }: { animate: boolean }) {
   const rootRef = useRef<Group>(null)
   const pointer = useRef({ x: 0, y: 0 })
   const { camera, gl } = useThree()
-  const textures = useLogoTextures()
 
   useEffect(() => {
     const el = gl.domElement
@@ -279,16 +124,13 @@ function MarketScene({ animate }: { animate: boolean }) {
     const targetY = 2.2 + pointer.current.y * 0.22
     cam.position.x += (targetX - cam.position.x) * 0.045
     cam.position.y += (targetY - cam.position.y) * 0.045
-    cam.lookAt(0, 0.45, 0)
+    cam.lookAt(0, 0.2, 0)
   })
 
   return (
-    <group ref={rootRef} position={[0, 0.25, 0]}>
-      <group rotation={[-0.18, 0.08, 0]}>
-        <ChartFloor />
-        <PriceRibbon animate={animate} />
-      </group>
-      <LogoCandles animate={animate} textures={textures} />
+    <group ref={rootRef} rotation={[-0.28, 0.14, 0]} position={[0, 0.1, 0]}>
+      <ChartFloor />
+      <PriceRibbon animate={animate} />
     </group>
   )
 }
@@ -297,7 +139,7 @@ function Scene({ animate }: { animate: boolean }) {
   return (
     <>
       <color attach="background" args={[SLATE]} />
-      <fog attach="fog" args={[SLATE, 10, 28]} />
+      <fog attach="fog" args={[SLATE, 9, 26]} />
       <MarketScene animate={animate} />
     </>
   )
