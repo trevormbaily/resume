@@ -2,6 +2,7 @@ import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   BufferGeometry,
+  DoubleSide,
   Float32BufferAttribute,
   type Group,
   type PerspectiveCamera,
@@ -142,7 +143,8 @@ function LogoPillar({
     const t = animate ? state.clock.elapsedTime : 0
     groupRef.current.position.y = Math.sin(t * 0.9 + phase) * 0.05
     if (boardRef.current) {
-      boardRef.current.lookAt(camera.position)
+      // Match camera orientation so +Z planes face the viewer.
+      boardRef.current.quaternion.copy(camera.quaternion)
     }
   })
 
@@ -165,6 +167,7 @@ function LogoPillar({
             transparent
             depthWrite={false}
             toneMapped={false}
+            side={DoubleSide}
           />
         </mesh>
       </group>
