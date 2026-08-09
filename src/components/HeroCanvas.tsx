@@ -1,16 +1,17 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
-  BufferAttribute,
+  BufferGeometry,
   Color,
+  Float32BufferAttribute,
   type Group,
-  type Mesh,
   type PerspectiveCamera,
 } from 'three'
 
 const SLATE = '#14181f'
-const WIRE = '#3a4656'
+const GRID = '#2a3442'
 const EMERALD = '#0b6e4f'
+const MUTED = '#5a6575'
 
 function useHeroVisible(element: HTMLElement | null) {
   const [inView, setInView] = useState(true)
@@ -41,14 +42,164 @@ function useHeroVisible(element: HTMLElement | null) {
   return inView && pageVisible
 }
 
-function Terrain({ animate }: { animate: boolean }) {
-  const primaryRef = useRef<Mesh>(null)
-  const accentRef = useRef<Mesh>(null)
+function seeded(n: number) {
+  const x = Math.sin(n * 127.1) * 43758.5453
+  return x - Math.floor(x)
+}
+
+function ChartFloor() {
+  const positions = useMemo(() => {
+    const lines: number[] = []
+    for (let i = -10; i <= 10; i += 1) {
+      lines.push(i, 0, -8, i, 0, 8)
+    }
+    for (let j = -8; j <= 8; j += 1) {
+      lines.push(-10, 0, j, 10, 0, j)
+    }
+    return new Float32Array(lines)
+  }, [])
+
+  return (
+    <lineSegments rotation={[0, 0, 0]} position={[0, -1.35, 0]}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+      </bufferGeometry>
+      <lineBasicMaterial color={GRID} transparent opacity={0.35} />
+    </lineSegments>
+  )
+}
+
+function PriceRibbon({ animate }: { animate: boolean }) {
+  const geo = useMemo(() => new BufferGeometry(), [])
+  const pointCount = 96
+
+  useFrame((state) => {
+    const t = animate ? state.clock.elapsedTime : 0
+    const pts: number[] = []
+    let y = 0.35
+    for (let i = 0; i < pointCount; i += 1) {
+      const x = -9 + (i / (pointCount - 1)) * 18
+      const drift =
+        Math.sin(i * 0.18 + t * 0.55) * 0.55 +
+        Math.sin(i * 0.07 + t * 0.22) * 0.35 +
+        seeded(i + 3) * 0.12
+      y = y * 0.86 + drift * 0.42
+      pts.push(x, y, -0.2)
+    }
+    geo.setAttribute('position', new Float32BufferAttribute(pts, 3))
+  })
+
+  return (
+    <line>
+      <primitive object={geo} attach="geometry" />
+      <lineBasicMaterial color={EMERALD} transparent opacity={0.9} />
+    </line>
+  )
+}
+
+type Candle = {
+  x: number
+  open: number
+  close: number
+  high: number
+  low: number
+  up: boolean
+}
+
+function Candlesticks({ animate }: { animate: boolean }) {
   const groupRef = useRef<Group>(null)
+
+  const candles = useMemo<Candle[]>(() => {
+    const list: Candle[] = []
+    let price = 0.2
+    for (let i = 0; i < 22; i += 1) {
+      const open = price
+      const delta = (seeded(i * 17.3) - 0.45) * 0.9
+      const close = open + delta
+      const high = Math.max(open, close) + seeded(i * 9.1) * 0.25
+      const low = Math.min(open, close) - seeded(i * 5.7) * 0.25
+      list.push({
+        x: -8.5 + i * 0.78,
+        open,
+        close,
+        high,
+        low,
+        up: close >= open,
+      })
+      price = close
+    }
+    return list
+  }, [])
+
+  useFrame((state) => {
+    if (!groupRef.current || !animate) return
+    const t = state.clock.elapsedTime
+    groupRef.current.position.y = Math.sin(t * 0.35) * 0.04
+  })
+
+  return (
+    <group ref={groupRef} position={[0, -0.15, 0.4]}>
+      {candles.map((c) => {
+        const bodyH = Math.max(0.08, Math.abs(c.close - c.open))
+        const bodyY = (c.open + c.close) / 2
+        const wickH = Math.max(0.08, c.high - c.low)
+        const color = c.up ? EMERALD : MUTED
+        return (
+          <group key={c.x} position={[c.x, 0, 0]}>
+            <mesh position={[0, (c.high + c.low) / 2, 0]}>
+              <boxGeometry args={[0.035, wickH, 0.035]} />
+              <meshBasicMaterial color={color} transparent opacity={0.55} />
+            </mesh>
+            <mesh position={[0, bodyY, 0.02]}>
+              <boxGeometry args={[0.28, bodyH, 0.12]} />
+              <meshBasicMaterial color={color} transparent opacity={0.78} />
+            </mesh>
+          </group>
+        )
+      })}
+    </group>
+  )
+}
+
+function VolumeBars({ animate }: { animate: boolean }) {
+  const bars = useMemo(() => {
+    return Array.from({ length: 28 }, (_, i) => ({
+      x: -9 + i * 0.65,
+      h: 0.2 + seeded(i * 11.2) * 1.1,
+      phase: seeded(i * 3.4) * Math.PI * 2,
+    }))
+  }, [])
+
+  const groupRef = useRef<Group>(null)
+
+  useFrame((state) => {
+    if (!groupRef.current || !animate) return
+    const t = state.clock.elapsedTime
+    groupRef.current.children.forEach((child, i) => {
+      const bar = bars[i]
+      if (!bar) return
+      const scaleY = 0.55 + Math.sin(t * 0.7 + bar.phase) * 0.25
+      child.scale.y = Math.max(0.2, bar.h * scaleY)
+      child.position.y = -1.35 + child.scale.y / 2
+    })
+  })
+
+  return (
+    <group ref={groupRef}>
+      {bars.map((bar) => (
+        <mesh key={bar.x} position={[bar.x, -1.0, 1.2]}>
+          <boxGeometry args={[0.28, 1, 0.28]} />
+          <meshBasicMaterial color={new Color(EMERALD)} transparent opacity={0.18} />
+        </mesh>
+      ))}
+    </group>
+  )
+}
+
+function MarketScene({ animate }: { animate: boolean }) {
+  const rootRef = useRef<Group>(null)
   const pointer = useRef({ x: 0, y: 0 })
   const { camera, gl } = useThree()
-
-  const geometryArgs = useMemo(() => [28, 18, 56, 36] as const, [])
 
   useEffect(() => {
     const el = gl.domElement
@@ -65,77 +216,25 @@ function Terrain({ animate }: { animate: boolean }) {
 
   useFrame((state) => {
     const t = animate ? state.clock.elapsedTime : 0
-    const meshes = [primaryRef.current, accentRef.current]
-
-    for (const mesh of meshes) {
-      if (!mesh) continue
-      const positions = mesh.geometry.getAttribute('position') as BufferAttribute
-      const count = positions.count
-      for (let i = 0; i < count; i += 1) {
-        const x = positions.getX(i)
-        const y = positions.getY(i)
-        const wave =
-          Math.sin(x * 0.38 + t * 0.32) * 0.42 +
-          Math.cos(y * 0.3 + t * 0.22) * 0.32 +
-          Math.sin((x + y) * 0.18 + t * 0.18) * 0.18
-        positions.setZ(i, wave)
-      }
-      positions.needsUpdate = true
-    }
-
-    if (groupRef.current) {
-      groupRef.current.rotation.z = Math.sin(t * 0.08) * 0.03
+    if (rootRef.current) {
+      rootRef.current.rotation.y = Math.sin(t * 0.12) * 0.04
     }
 
     const cam = camera as PerspectiveCamera
-    const targetX = pointer.current.x * 0.55
-    const targetY = 3.1 + pointer.current.y * 0.35
-    cam.position.x += (targetX - cam.position.x) * 0.04
-    cam.position.y += (targetY - cam.position.y) * 0.04
+    const targetX = pointer.current.x * 0.45
+    const targetY = 2.4 + pointer.current.y * 0.28
+    cam.position.x += (targetX - cam.position.x) * 0.045
+    cam.position.y += (targetY - cam.position.y) * 0.045
     cam.lookAt(0, 0, 0)
   })
 
   return (
-    <group ref={groupRef} rotation={[-0.72, 0.18, 0.08]} position={[0, -1.1, 0]}>
-      <mesh ref={primaryRef}>
-        <planeGeometry args={[...geometryArgs]} />
-        <meshBasicMaterial color={new Color(WIRE)} wireframe transparent opacity={0.42} />
-      </mesh>
-      <mesh ref={accentRef} position={[0, 0, 0.02]} scale={[0.72, 0.72, 1]}>
-        <planeGeometry args={[20, 12, 28, 18]} />
-        <meshBasicMaterial
-          color={new Color(EMERALD)}
-          wireframe
-          transparent
-          opacity={0.55}
-        />
-      </mesh>
-      <HorizonLines />
+    <group ref={rootRef} rotation={[-0.38, 0.22, 0.04]} position={[0.4, 0.2, 0]}>
+      <ChartFloor />
+      <Candlesticks animate={animate} />
+      <PriceRibbon animate={animate} />
+      <VolumeBars animate={animate} />
     </group>
-  )
-}
-
-function HorizonLines() {
-  const positions = useMemo(() => {
-    const lines: number[] = []
-    for (let i = 0; i < 6; i += 1) {
-      const y = -2 + i * 1.15
-      const depth = -4 - i * 0.35
-      lines.push(-16, y, depth, 16, y, depth)
-    }
-    return new Float32Array(lines)
-  }, [])
-
-  return (
-    <lineSegments position={[0, 0, -0.4]}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[positions, 3]}
-        />
-      </bufferGeometry>
-      <lineBasicMaterial color={EMERALD} transparent opacity={0.22} />
-    </lineSegments>
   )
 }
 
@@ -143,8 +242,8 @@ function Scene({ animate }: { animate: boolean }) {
   return (
     <>
       <color attach="background" args={[SLATE]} />
-      <fog attach="fog" args={[SLATE, 8, 26]} />
-      <Terrain animate={animate} />
+      <fog attach="fog" args={[SLATE, 7, 22]} />
+      <MarketScene animate={animate} />
     </>
   )
 }
@@ -162,14 +261,14 @@ export function HeroCanvas() {
     <div ref={hostRef} className="absolute inset-0">
       <Canvas
         dpr={[1, 1.5]}
-        camera={{ position: [0, 3.2, 7.5], fov: 42, near: 0.1, far: 40 }}
+        camera={{ position: [0, 2.6, 8.2], fov: 40, near: 0.1, far: 40 }}
         frameloop={visible ? 'always' : 'never'}
         gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
       >
         <Scene animate={visible} />
       </Canvas>
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#14181f] via-[#14181f]/35 to-transparent" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(70%_55%_at_70%_30%,rgba(11,110,79,0.18),transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#14181f] via-[#14181f]/40 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(65%_50%_at_75%_28%,rgba(11,110,79,0.16),transparent_62%)]" />
     </div>
   )
 }

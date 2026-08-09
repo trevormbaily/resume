@@ -35,7 +35,7 @@ export default function App() {
       <header className="relative flex min-h-svh flex-col justify-end overflow-hidden bg-[#14181f] text-white">
         <HeroField />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-8 px-6 pt-24 pb-14 sm:px-10 sm:pb-20">
+        <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-10 px-6 pt-24 pb-14 sm:px-10 sm:pb-20 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
           <div className="flex max-w-3xl flex-col gap-5">
             <h1 className="font-[family-name:var(--font-display)] animate-[rise_0.85s_cubic-bezier(0.22,1,0.36,1)_both] text-[clamp(3.25rem,11vw,6.5rem)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white">
               {profile.name}
@@ -76,6 +76,19 @@ export default function App() {
                 <Mail data-icon="inline-start" />
                 Email
               </Button>
+            </div>
+          </div>
+
+          <div className="animate-[rise_0.85s_0.2s_cubic-bezier(0.22,1,0.36,1)_both] shrink-0 self-start lg:self-end">
+            <div className="relative size-36 overflow-hidden rounded-2xl border border-white/15 bg-white/5 shadow-[0_0_0_1px_rgba(11,110,79,0.35)] sm:size-44 lg:size-52">
+              <img
+                src="./portrait.png"
+                alt="Trevor Baily"
+                width={208}
+                height={208}
+                className="size-full object-cover object-[50%_18%]"
+                decoding="async"
+              />
             </div>
           </div>
         </div>
