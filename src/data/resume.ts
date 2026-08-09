@@ -6,9 +6,9 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/trevor-baily24',
   linkedinLabel: 'linkedin.com/in/trevor-baily24',
   headline:
-    'Senior engineer who rebuilds high-traffic search experiences and builds AI tooling that helps teams move faster without cutting corners.',
+    'Omaha-based senior engineer. I rebuild high-traffic search experiences and build AI tooling that helps teams move faster without cutting corners.',
   support:
-    'Most at home in React, TypeScript, and Vite — owning the path from UI through BFF, search, and production.',
+    'Most days that means React, TypeScript, and Vite, owning the path from the UI through the BFF, search, and production.',
 }
 
 export const skillGroups = [
@@ -31,7 +31,7 @@ export const skillGroups = [
       '.NET BFFs',
       'Java / Spring search',
       'OpenAPI contracts',
-      'Stored proc → API migrations',
+      'Stored proc to API migrations',
     ],
   },
   {
@@ -67,7 +67,7 @@ export const skillGroups = [
   {
     label: 'Product',
     items: [
-      'Search & discovery',
+      'Search and discovery',
       'A/B experiments',
       'Feature flags',
       'Marketplace UX',
@@ -87,36 +87,36 @@ export const roles: Role[] = [
     company: 'Auction Technology Group (ATG)',
     location: 'Omaha, NE (remote)',
     titles: [
-      { title: 'Senior Software Development Engineer', dates: 'Oct 2024 – Present' },
-      { title: 'Software Development Engineer', dates: 'May 2022 – Oct 2024' },
+      { title: 'Senior Software Development Engineer', dates: 'Oct 2024 - Present' },
+      { title: 'Software Development Engineer', dates: 'May 2022 - Oct 2024' },
     ],
     bullets: [
-      'Own marketplace search end to end — React/Next UI, .NET BFF, Java search services, and the deploy path. I take the whole vertical, not just a ticket in one layer.',
-      'Lead legacy → Next.js App Router migrations with behavior parity as the bar. Design tokens and URL state keep search shareable and history-correct.',
+      'Own marketplace search end to end: React/Next UI, .NET BFF, Java search services, and the deploy path. I take the whole vertical, not just a ticket in one layer.',
+      'Lead migrations from legacy UIs to Next.js App Router with behavior parity as the bar. Design tokens and URL state keep search shareable and history-correct.',
       'Keep data shaping in the BFF so the UI stays thin. Contract-first FE/BE work, mock-first UI, and contract tests in CI.',
-      'Protect quality during migrations: Vitest/Testing Library first, Playwright when a real browser earns its keep, and coverage gates treated as product decisions — not theater.',
-      'Build AI-assisted engineering workflows teams can reuse — skills, ticket-to-implement pipelines, and human approval before anything with side effects.',
-      'Work carefully across shared repos: map blast radius before coding, know what we own vs. what we only consume, and keep observability clear enough that QA can block on it.',
-      'Earlier at ATG: shipped a payments integration ahead of schedule, Spring Boot and legacy Java, Gatling performance work, and moved a shared component library onto Next.js / TypeScript.',
+      'Protect quality during migrations. Vitest/Testing Library first, Playwright when a real browser earns its keep, and coverage gates treated as product decisions, not theater.',
+      'Build AI-assisted engineering workflows teams can reuse: skills, ticket-to-implement pipelines, and human approval before anything with side effects.',
+      'Work carefully across shared repos. Map blast radius before coding, know what we own vs. what we only consume, and keep observability clear enough that QA can block on it.',
+      'Earlier at ATG I shipped a payments integration ahead of schedule, worked Spring Boot and legacy Java, ran Gatling performance work, and moved a shared component library onto Next.js / TypeScript.',
     ],
   },
   {
     company: 'Priority Technologies LLC',
     location: '',
-    titles: [{ title: 'Senior Frontend Developer', dates: 'Jul 2017 – May 2022' }],
+    titles: [{ title: 'Senior Frontend Developer', dates: 'Jul 2017 - May 2022' }],
     bullets: [
-      'Modernized the frontend of a large enterprise monolith (1.5M+ LOC) with Vue.js, Vuetify, Tailwind, and Pinia — clearer UX and meaningfully faster page loads.',
+      'Modernized the frontend of a large enterprise monolith (1.5M+ LOC) with Vue.js, Vuetify, Tailwind, and Pinia. Clearer UX, and the pages actually loaded faster.',
       'Was the sole frontend engineer who took a state-based product from idea to production in under six months, including requirements and design.',
-      'Led a Struts 1 → Struts 2 migration as both PM and developer with thin knowledge transfer, and rolled it out to all clients on time and under budget.',
+      'Led a Struts 1 to Struts 2 migration as both PM and developer with thin knowledge transfer, and rolled it out to all clients on time and under budget.',
       'Moved dependency management from manual ANT builds to Maven, including security reviews and library upgrades.',
-      'Built the consumer-facing web presence that helped grow exposure and support acquisition of the product; added JasperSoft / HighCharts for embedded reporting.',
+      'Built the consumer-facing web presence that helped grow exposure and support acquisition of the product, and added JasperSoft / HighCharts for embedded reporting.',
     ],
   },
 ]
 
 export const education = {
-  school: 'University of Nebraska–Lincoln',
-  dates: '2012 – 2016',
+  school: 'University of Nebraska-Lincoln',
+  dates: '2012 - 2016',
   degree: 'Bachelor of Business Administration (B.B.A.), Finance',
-  note: 'Picked up software engineering through mentors and deliberate practice, then moved into professional web development.',
+  note: 'Husker alum. Learned software the long way, mentors and a lot of practice, then made it my career.',
 }
