@@ -37,7 +37,7 @@ export default function App() {
 
         <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col gap-10 px-6 pt-24 pb-14 sm:px-10 sm:pb-20 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
           <div className="flex max-w-3xl flex-col gap-5">
-            <h1 className="font-[family-name:var(--font-display)] animate-[rise_0.85s_cubic-bezier(0.22,1,0.36,1)_both] text-[clamp(3.25rem,11vw,6.5rem)] leading-[0.9] font-extrabold tracking-[-0.04em] text-white">
+            <h1 className="font-[family-name:var(--font-name)] animate-[rise_0.85s_cubic-bezier(0.22,1,0.36,1)_both] text-[clamp(3.25rem,11vw,6.5rem)] leading-[0.92] font-black tracking-[-0.03em] text-white">
               {profile.name}
             </h1>
 
