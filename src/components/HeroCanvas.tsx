@@ -131,8 +131,10 @@ function LogoPillar({
   const boardRef = useRef<Group>(null)
   const { camera } = useThree()
 
-  const height = 0.7 + seeded(index * 13.7) * 1.2
-  const x = -7.8 + index * 1.22
+  const count = TECH_LOGOS.length
+  const spacing = 1.05
+  const height = 0.7 + seeded(index * 13.7) * 1.15
+  const x = -((count - 1) * spacing) / 2 + index * spacing
   const phase = seeded(index * 4.2) * Math.PI * 2
 
   useFrame((state) => {
