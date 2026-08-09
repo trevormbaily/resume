@@ -1,13 +1,12 @@
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import {
   BufferGeometry,
-  CanvasTexture,
-  Color,
   Float32BufferAttribute,
-  SRGBColorSpace,
   type Group,
   type PerspectiveCamera,
+  SRGBColorSpace,
+  TextureLoader,
   type Texture,
 } from 'three'
 
@@ -30,6 +29,10 @@ const TECH_LOGOS = [
   { slug: 'openapiinitiative', label: 'OpenAPI' },
   { slug: 'github', label: 'GitHub' },
 ] as const
+
+const LOGO_URLS = TECH_LOGOS.map(
+  (logo) => `${import.meta.env.BASE_URL}logos/${logo.slug}.png`,
+)
 
 function useHeroVisible(element: HTMLElement | null) {
   const [inView, setInView] = useState(true)
@@ -63,55 +66,6 @@ function useHeroVisible(element: HTMLElement | null) {
 function seeded(n: number) {
   const x = Math.sin(n * 127.1) * 43758.5453
   return x - Math.floor(x)
-}
-
-function useLogoTextures(slugs: readonly string[]) {
-  const [textures, setTextures] = useState<Record<string, Texture>>({})
-
-  useEffect(() => {
-    let cancelled = false
-    const loaded: Record<string, Texture> = {}
-
-    Promise.all(
-      slugs.map(
-        (slug) =>
-          new Promise<void>((resolve) => {
-            const img = new Image()
-            img.decoding = 'async'
-            img.onload = () => {
-              const size = 256
-              const canvas = document.createElement('canvas')
-              canvas.width = size
-              canvas.height = size
-              const ctx = canvas.getContext('2d')
-              if (!ctx) {
-                resolve()
-                return
-              }
-              ctx.clearRect(0, 0, size, size)
-              const pad = 28
-              ctx.drawImage(img, pad, pad, size - pad * 2, size - pad * 2)
-              const texture = new CanvasTexture(canvas)
-              texture.colorSpace = SRGBColorSpace
-              texture.needsUpdate = true
-              loaded[slug] = texture
-              resolve()
-            }
-            img.onerror = () => resolve()
-            img.src = `./logos/${slug}.svg`
-          }),
-      ),
-    ).then(() => {
-      if (!cancelled) setTextures(loaded)
-    })
-
-    return () => {
-      cancelled = true
-      Object.values(loaded).forEach((texture) => texture.dispose())
-    }
-  }, [slugs])
-
-  return textures
 }
 
 function ChartFloor() {
@@ -151,7 +105,7 @@ function PriceRibbon({ animate }: { animate: boolean }) {
         Math.sin(i * 0.07 + t * 0.22) * 0.28 +
         seeded(i + 3) * 0.1
       y = y * 0.86 + drift * 0.42
-      pts.push(x, y + 1.15, -0.35)
+      pts.push(x, y + 1.35, -0.55)
     }
     geo.setAttribute('position', new Float32BufferAttribute(pts, 3))
   })
@@ -159,76 +113,86 @@ function PriceRibbon({ animate }: { animate: boolean }) {
   return (
     <line>
       <primitive object={geo} attach="geometry" />
-      <lineBasicMaterial color={EMERALD} transparent opacity={0.75} />
+      <lineBasicMaterial color={EMERALD} transparent opacity={0.7} />
     </line>
   )
 }
 
-function LogoCandles({
+function LogoPillar({
+  index,
   animate,
-  textures,
+  texture,
 }: {
+  index: number
   animate: boolean
-  textures: Record<string, Texture>
+  texture: Texture
 }) {
   const groupRef = useRef<Group>(null)
+  const boardRef = useRef<Group>(null)
+  const { camera } = useThree()
 
-  const items = useMemo(() => {
-    return TECH_LOGOS.map((logo, i) => {
-      const height = 0.55 + seeded(i * 13.7) * 1.35
-      return {
-        ...logo,
-        x: -8.2 + i * 1.28,
-        height,
-        phase: seeded(i * 4.2) * Math.PI * 2,
-      }
-    })
-  }, [])
+  const height = 0.7 + seeded(index * 13.7) * 1.2
+  const x = -7.8 + index * 1.22
+  const phase = seeded(index * 4.2) * Math.PI * 2
 
   useFrame((state) => {
-    if (!groupRef.current || !animate) return
-    const t = state.clock.elapsedTime
-    groupRef.current.position.y = Math.sin(t * 0.35) * 0.04
-    groupRef.current.children.forEach((child, i) => {
-      const item = items[i]
-      if (!item) return
-      const bob = Math.sin(t * 0.9 + item.phase) * 0.06
-      child.position.y = bob
-      child.rotation.y = Math.sin(t * 0.45 + item.phase) * 0.15
-    })
+    if (!groupRef.current) return
+    const t = animate ? state.clock.elapsedTime : 0
+    groupRef.current.position.y = Math.sin(t * 0.9 + phase) * 0.05
+    if (boardRef.current) {
+      boardRef.current.lookAt(camera.position)
+    }
   })
 
   return (
-    <group ref={groupRef} position={[0, -0.2, 0.55]}>
-      {items.map((item) => {
-        const texture = textures[item.slug]
-        const stemH = item.height
-        return (
-          <group key={item.slug} position={[item.x, 0, 0]}>
-            <mesh position={[0, stemH / 2 - 1.2, 0]}>
-              <boxGeometry args={[0.08, stemH, 0.08]} />
-              <meshBasicMaterial color={EMERALD} transparent opacity={0.35} />
-            </mesh>
-            <mesh position={[0, stemH - 0.85, 0.12]}>
-              <planeGeometry args={[0.72, 0.72]} />
-              {texture ? (
-                <meshBasicMaterial map={texture} transparent depthWrite={false} />
-              ) : (
-                <meshBasicMaterial color={new Color(EMERALD)} transparent opacity={0.5} />
-              )}
-            </mesh>
-            {/* back face so logos read from both sides while the scene drifts */}
-            <mesh position={[0, stemH - 0.85, 0.11]} rotation={[0, Math.PI, 0]}>
-              <planeGeometry args={[0.72, 0.72]} />
-              {texture ? (
-                <meshBasicMaterial map={texture} transparent depthWrite={false} />
-              ) : (
-                <meshBasicMaterial color={new Color(EMERALD)} transparent opacity={0.5} />
-              )}
-            </mesh>
-          </group>
-        )
-      })}
+    <group ref={groupRef} position={[x, -1.2, 0.7]}>
+      <mesh position={[0, height / 2, 0]}>
+        <boxGeometry args={[0.1, height, 0.1]} />
+        <meshBasicMaterial color={EMERALD} transparent opacity={0.4} toneMapped={false} />
+      </mesh>
+
+      <group ref={boardRef} position={[0, height + 0.15, 0]}>
+        <mesh position={[0, 0, -0.01]}>
+          <circleGeometry args={[0.48, 32]} />
+          <meshBasicMaterial color="#0f1620" transparent opacity={0.92} toneMapped={false} />
+        </mesh>
+        <mesh>
+          <planeGeometry args={[0.7, 0.7]} />
+          <meshBasicMaterial
+            map={texture}
+            transparent
+            depthWrite={false}
+            toneMapped={false}
+          />
+        </mesh>
+      </group>
+    </group>
+  )
+}
+
+function LogoCandles({ animate }: { animate: boolean }) {
+  const textures = useLoader(TextureLoader, [...LOGO_URLS])
+
+  useEffect(() => {
+    const list = Array.isArray(textures) ? textures : [textures]
+    for (const texture of list) {
+      texture.colorSpace = SRGBColorSpace
+      texture.needsUpdate = true
+    }
+  }, [textures])
+
+  const list = Array.isArray(textures) ? textures : [textures]
+
+  return (
+    <group>
+      {list.map((texture, index) => (
+        <LogoPillar
+          key={LOGO_URLS[index]}
+          index={index}
+          animate={animate}
+          texture={texture}
+        />
+      ))}
     </group>
   )
 }
@@ -237,8 +201,6 @@ function MarketScene({ animate }: { animate: boolean }) {
   const rootRef = useRef<Group>(null)
   const pointer = useRef({ x: 0, y: 0 })
   const { camera, gl } = useThree()
-  const slugs = useMemo(() => TECH_LOGOS.map((logo) => logo.slug), [])
-  const textures = useLogoTextures(slugs)
 
   useEffect(() => {
     const el = gl.domElement
@@ -268,9 +230,9 @@ function MarketScene({ animate }: { animate: boolean }) {
   })
 
   return (
-    <group ref={rootRef} rotation={[-0.38, 0.22, 0.04]} position={[0.4, 0.2, 0]}>
+    <group ref={rootRef} rotation={[-0.32, 0.18, 0.02]} position={[0.2, 0.15, 0]}>
       <ChartFloor />
-      <LogoCandles animate={animate} textures={textures} />
+      <LogoCandles animate={animate} />
       <PriceRibbon animate={animate} />
     </group>
   )
@@ -280,7 +242,7 @@ function Scene({ animate }: { animate: boolean }) {
   return (
     <>
       <color attach="background" args={[SLATE]} />
-      <fog attach="fog" args={[SLATE, 7, 22]} />
+      <fog attach="fog" args={[SLATE, 8, 24]} />
       <MarketScene animate={animate} />
     </>
   )
