@@ -11,29 +11,39 @@ import {
   TextureLoader,
 } from 'three'
 
+import logoDotnet from '@/assets/logos/dotnet.png'
+import logoGithub from '@/assets/logos/github.png'
+import logoKubernetes from '@/assets/logos/kubernetes.png'
+import logoNext from '@/assets/logos/nextdotjs.png'
+import logoNode from '@/assets/logos/nodedotjs.png'
+import logoOpenapi from '@/assets/logos/openapiinitiative.png'
+import logoReact from '@/assets/logos/react.png'
+import logoSpring from '@/assets/logos/spring.png'
+import logoTailwind from '@/assets/logos/tailwindcss.png'
+import logoThree from '@/assets/logos/threedotjs.png'
+import logoTypescript from '@/assets/logos/typescript.png'
+import logoVite from '@/assets/logos/vite.png'
+import logoVue from '@/assets/logos/vuedotjs.png'
+
 const SLATE = '#14181f'
 const GRID = '#2a3442'
 const EMERALD = '#0b6e4f'
 
 const TECH_LOGOS = [
-  { slug: 'react', label: 'React' },
-  { slug: 'typescript', label: 'TypeScript' },
-  { slug: 'vite', label: 'Vite' },
-  { slug: 'nextdotjs', label: 'Next.js' },
-  { slug: 'tailwindcss', label: 'Tailwind' },
-  { slug: 'threedotjs', label: 'Three.js' },
-  { slug: 'vuedotjs', label: 'Vue' },
-  { slug: 'dotnet', label: '.NET' },
-  { slug: 'spring', label: 'Spring' },
-  { slug: 'nodedotjs', label: 'Node.js' },
-  { slug: 'kubernetes', label: 'Kubernetes' },
-  { slug: 'openapiinitiative', label: 'OpenAPI' },
-  { slug: 'github', label: 'GitHub' },
+  { slug: 'react', src: logoReact },
+  { slug: 'typescript', src: logoTypescript },
+  { slug: 'vite', src: logoVite },
+  { slug: 'nextdotjs', src: logoNext },
+  { slug: 'tailwindcss', src: logoTailwind },
+  { slug: 'threedotjs', src: logoThree },
+  { slug: 'vuedotjs', src: logoVue },
+  { slug: 'dotnet', src: logoDotnet },
+  { slug: 'spring', src: logoSpring },
+  { slug: 'nodedotjs', src: logoNode },
+  { slug: 'kubernetes', src: logoKubernetes },
+  { slug: 'openapiinitiative', src: logoOpenapi },
+  { slug: 'github', src: logoGithub },
 ] as const
-
-function logoUrl(slug: string) {
-  return new URL(`logos/${slug}.png`, window.location.href).href
-}
 
 function useHeroVisible(element: HTMLElement | null) {
   const [inView, setInView] = useState(true)
@@ -81,7 +91,7 @@ function useLogoTextures() {
 
     TECH_LOGOS.forEach((logo, index) => {
       loader.load(
-        logoUrl(logo.slug),
+        logo.src,
         (texture) => {
           if (cancelled) {
             texture.dispose()
@@ -94,10 +104,7 @@ function useLogoTextures() {
         },
         undefined,
         () => {
-          if (!cancelled) {
-            next[index] = null
-            setTextures([...next])
-          }
+          if (!cancelled) setTextures([...next])
         },
       )
     })
@@ -185,13 +192,13 @@ function LogoPillar({
   })
 
   return (
-    <group ref={groupRef} position={[x, -0.2, 0.45]}>
+    <group ref={groupRef} position={[x, -0.15, 0.5]}>
       <mesh position={[0, height / 2, 0]}>
         <boxGeometry args={[0.12, height, 0.12]} />
         <meshBasicMaterial color={EMERALD} transparent opacity={0.45} toneMapped={false} />
       </mesh>
 
-      <group position={[0, height + 0.28, 0.08]}>
+      <group position={[0, height + 0.3, 0.1]}>
         <mesh position={[0, 0, -0.02]}>
           <circleGeometry args={[0.52, 32]} />
           <meshBasicMaterial color="#101821" transparent opacity={0.96} toneMapped={false} />
@@ -272,11 +279,11 @@ function MarketScene({ animate }: { animate: boolean }) {
     const targetY = 2.2 + pointer.current.y * 0.22
     cam.position.x += (targetX - cam.position.x) * 0.045
     cam.position.y += (targetY - cam.position.y) * 0.045
-    cam.lookAt(0, 0.4, 0)
+    cam.lookAt(0, 0.45, 0)
   })
 
   return (
-    <group ref={rootRef} position={[0, 0.2, 0]}>
+    <group ref={rootRef} position={[0, 0.25, 0]}>
       <group rotation={[-0.18, 0.08, 0]}>
         <ChartFloor />
         <PriceRibbon animate={animate} />
