@@ -129,8 +129,6 @@ function LogoPillar({
   texture: Texture
 }) {
   const groupRef = useRef<Group>(null)
-  const boardRef = useRef<Group>(null)
-  const { camera } = useThree()
 
   const count = TECH_LOGOS.length
   const spacing = 1.05
@@ -142,26 +140,22 @@ function LogoPillar({
     if (!groupRef.current) return
     const t = animate ? state.clock.elapsedTime : 0
     groupRef.current.position.y = Math.sin(t * 0.9 + phase) * 0.05
-    if (boardRef.current) {
-      // Match camera orientation so +Z planes face the viewer.
-      boardRef.current.quaternion.copy(camera.quaternion)
-    }
   })
 
   return (
-    <group ref={groupRef} position={[x, -1.2, 0.7]}>
+    <group ref={groupRef} position={[x, -0.35, 0.35]}>
       <mesh position={[0, height / 2, 0]}>
         <boxGeometry args={[0.1, height, 0.1]} />
         <meshBasicMaterial color={EMERALD} transparent opacity={0.4} toneMapped={false} />
       </mesh>
 
-      <group ref={boardRef} position={[0, height + 0.15, 0]}>
-        <mesh position={[0, 0, -0.01]}>
-          <circleGeometry args={[0.48, 32]} />
-          <meshBasicMaterial color="#0f1620" transparent opacity={0.92} toneMapped={false} />
+      <group position={[0, height + 0.2, 0.05]} rotation={[0, 0.15, 0]}>
+        <mesh position={[0, 0, -0.02]}>
+          <circleGeometry args={[0.5, 32]} />
+          <meshBasicMaterial color="#101821" transparent opacity={0.95} toneMapped={false} />
         </mesh>
         <mesh>
-          <planeGeometry args={[0.7, 0.7]} />
+          <planeGeometry args={[0.78, 0.78]} />
           <meshBasicMaterial
             map={texture}
             transparent
@@ -235,10 +229,12 @@ function MarketScene({ animate }: { animate: boolean }) {
   })
 
   return (
-    <group ref={rootRef} rotation={[-0.32, 0.18, 0.02]} position={[0.2, 0.15, 0]}>
-      <ChartFloor />
+    <group ref={rootRef} position={[0, 0.35, 0]}>
+      <group rotation={[-0.22, 0.12, 0]}>
+        <ChartFloor />
+        <PriceRibbon animate={animate} />
+      </group>
       <LogoCandles animate={animate} />
-      <PriceRibbon animate={animate} />
     </group>
   )
 }
