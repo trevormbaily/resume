@@ -36,7 +36,7 @@ export const skillGroups = [
   {
     label: 'Quality',
     items: [
-      'Vitest / Jest / Testing Library',
+      'Vitest / Jest',
       'Playwright',
       'Coverage gates',
       'Static analysis',

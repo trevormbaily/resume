@@ -106,21 +106,35 @@ export default function App() {
             description="What I reach for day to day: frontend platforms, delivery, and AI-assisted engineering."
           />
 
-          <div className="grid gap-8 sm:grid-cols-2">
-            {skillGroups.map((group) => (
+          <div className="grid gap-7 sm:grid-cols-2">
+            {skillGroups.map((group, groupIndex) => (
               <div
                 key={group.label}
-                className="flex flex-col gap-3 border-t border-border pt-5"
+                className="skill-group relative flex flex-col gap-3.5 rounded-xl border border-border/80 bg-white/55 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-[2px] sm:p-5"
+                style={{ animationDelay: `${0.06 + groupIndex * 0.05}s` }}
               >
-                <h3 className="text-sm font-semibold tracking-tight">
-                  {group.label}
-                </h3>
-                <div className="flex flex-wrap gap-1.5">
-                  {group.items.map((item) => (
+                <div className="flex items-center gap-2.5">
+                  <span
+                    aria-hidden="true"
+                    className="size-1.5 shrink-0 rounded-[2px] bg-[var(--accent-signal)]"
+                  />
+                  <h3 className="text-[0.7rem] font-semibold tracking-[0.14em] text-foreground/70 uppercase">
+                    {group.label}
+                  </h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {group.items.map((item, itemIndex) => (
                     <span
                       key={item}
-                      className="rounded-md border border-border bg-background px-2.5 py-1 text-[0.8rem] text-foreground/85"
+                      className="skill-chip group/chip relative inline-flex items-center gap-2 overflow-hidden rounded-md border border-[#cfd6de] bg-[#f8fafb] px-2.5 py-1.5 text-[0.8rem] font-medium tracking-tight text-foreground/90 transition-[border-color,background-color,transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:border-[var(--accent-signal)]/45 hover:bg-[#eef6f2] hover:shadow-[0_8px_18px_-12px_rgba(11,110,79,0.55)]"
+                      style={{
+                        animationDelay: `${0.1 + groupIndex * 0.04 + itemIndex * 0.03}s`,
+                      }}
                     >
+                      <span
+                        aria-hidden="true"
+                        className="size-1 shrink-0 rounded-[1px] bg-[var(--accent-signal)]/70 transition-colors group-hover/chip:bg-[var(--accent-signal)]"
+                      />
                       {item}
                     </span>
                   ))}
