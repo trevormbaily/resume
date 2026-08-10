@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "deploy": "npm run build && gh-pages -d dist --nojekyll"
+    "deploy": "npm run build && gh-pages -d dist --nojekyll",
+    "resume:pdf": "npm run build && node scripts/export-resume-pdf.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

@@ -17,19 +17,18 @@ export const skillGroups = [
     items: [
       'React 19',
       'Next.js App Router',
-      'TypeScript (strict)',
+      'TypeScript',
       'Vite',
-      'Three.js / R3F',
       'Tailwind',
       'Design systems',
-      'URL-driven state',
     ],
   },
   {
     label: 'Backend',
     items: [
       '.NET BFFs',
-      'Java / Spring search',
+      'Java / Kotlin / Spring Boot',
+      'Elasticsearch',
       'OpenAPI contracts',
       'Stored proc to API migrations',
     ],
@@ -37,31 +36,32 @@ export const skillGroups = [
   {
     label: 'Quality',
     items: [
-      'Vitest / Testing Library',
+      'Vitest / Jest / Testing Library',
       'Playwright',
       'Coverage gates',
       'Static analysis',
-      'Regression locks',
     ],
   },
   {
     label: 'Platform',
     items: [
       'Kubernetes ingress',
+      'NGINX',
+      'Cloudflare',
+      'AWS',
+      'GitHub Actions',
       'Octopus Deploy',
-      'Dependabot',
       'Dynatrace / structured logs',
     ],
   },
   {
     label: 'AI-assisted engineering',
     items: [
-      'Cursor skills',
+      'Cloud Agent Automations',
+      'Cursor skills/rules',
       'MCP',
-      'Agent workflows',
-      'Evals',
-      'AGENTS.md',
-      'Human review gates',
+      'Agent workflows/loops',
+      'Knowledge graphs/tag libraries',
     ],
   },
   {
