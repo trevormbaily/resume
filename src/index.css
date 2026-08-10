@@ -162,6 +162,10 @@
   animation: skill-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.skill-chip {
+  cursor: url("./assets/cursor-signal.png") 4 3, pointer;
+}
+
 .skill-chip::after {
   content: "";
   pointer-events: none;

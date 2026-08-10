@@ -103,7 +103,7 @@ export default function App() {
           <SectionHeading
             title="Skills"
             titleId="skills-title"
-            description="What I reach for day to day: frontend platforms, delivery, and AI-assisted engineering."
+            description="What I work with day to day:"
           />
 
           <div className="grid gap-7 sm:grid-cols-2">
