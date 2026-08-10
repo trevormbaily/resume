@@ -6,7 +6,7 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/trevor-baily24',
   linkedinLabel: 'linkedin.com/in/trevor-baily24',
   headline:
-    'Omaha-based senior engineer. I rebuild high-traffic search experiences and build AI tooling that helps teams move faster without cutting corners.',
+    'Omaha-based senior engineer. I leverage AI tooling to help push the limits on how impactful of an individual contributor I can be. I help teams move faster without cutting corners in the process.',
   support:
     'Most days that means React, TypeScript, and Vite, owning the path from the UI through the BFF, search, and production.',
 }
@@ -91,13 +91,12 @@ export const roles: Role[] = [
       { title: 'Software Development Engineer', dates: 'May 2022 - Oct 2024' },
     ],
     bullets: [
-      'Own marketplace search end to end: React/Next UI, .NET BFF, Java search services, and the deploy path. I take the whole vertical, not just a ticket in one layer.',
-      'Lead migrations from legacy UIs to Next.js App Router with behavior parity as the bar. Design tokens and URL state keep search shareable and history-correct.',
-      'Keep data shaping in the BFF so the UI stays thin. Contract-first FE/BE work, mock-first UI, and contract tests in CI.',
-      'Protect quality during migrations. Vitest/Testing Library first, Playwright when a real browser earns its keep, and coverage gates treated as product decisions, not theater.',
-      'Build AI-assisted engineering workflows teams can reuse: skills, ticket-to-implement pipelines, and human approval before anything with side effects.',
-      'Work carefully across shared repos. Map blast radius before coding, know what we own vs. what we only consume, and keep observability clear enough that QA can block on it.',
-      'Earlier at ATG I shipped a payments integration ahead of schedule, worked Spring Boot and legacy Java, ran Gatling performance work, and moved a shared component library onto Next.js / TypeScript.',
+      'Effective individual contributor with a breadth of service ownership across many languages and stacks.',
+      'Push for and help adopt agentic development: AI tooling, skills, and orchestration patterns teams can reuse.',
+      'Pioneer AI automation workflows and agentic cloud environments with Cursor.',
+      'Strong communicator with stakeholders on a large legacy consolidation effort.',
+      'Earlier as SDE: helped stability initiatives with performance-based testing and legacy maintenance; shipped the ATG Payments system integrating with existing internal services.',
+      'Maintained an ecosystem of Spring Boot microservices and legacy Classic ASP / Java monoliths, and contributed to a custom component library adopted in a modern Next.js / TypeScript UI.',
     ],
   },
   {
