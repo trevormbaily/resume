@@ -6,9 +6,9 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/trevor-baily24',
   linkedinLabel: 'linkedin.com/in/trevor-baily24',
   headline:
-    'Senior engineer in Omaha specializing in full-stack marketplace search and discovery. I own end-to-end delivery from React frontends through backend services to production, and build AI-assisted workflows that help teams ship faster without sacrificing quality.',
+    'AI-native engineer who ships production systems with agents. I led the first full-system Cursor-powered migration of a legacy codebase to modern Next.js, pioneered cloud agent workflows against enterprise repos, and build personal multi-agent systems used daily. I combine deep agentic engineering with end-to-end delivery—React frontends through backend services to Kubernetes production.',
   support:
-    'React/Next.js, TypeScript, .NET BFFs, Java/Spring Boot search, Kubernetes deployments. I focus on contract-first integration, test coverage, and legacy-to-modern migrations with behavior parity.',
+    'Proven: rewrote Classic ASP monolith to Next.js + .NET BFF entirely with Cursor; early adopter of cloud agents and environments; built AI workers on Cloudflare. Daily tools: React/Next.js, TypeScript, .NET, Java/Spring Boot, Cursor skills/rules, MCP, agent loops.',
 }
 
 export const skillGroups = [
@@ -55,13 +55,15 @@ export const skillGroups = [
     ],
   },
   {
-    label: 'AI-assisted engineering',
+    label: 'Agentic engineering',
     items: [
-      'Cloud Agent Automations',
-      'Cursor skills/rules',
-      'MCP',
-      'Agent workflows/loops',
-      'Knowledge graphs/tag libraries',
+      'Cloud agent workflows',
+      'Cursor skills/rules/environments',
+      'MCP server integrations',
+      'Multi-agent systems',
+      'Cloudflare AI Workers',
+      'Prompt engineering',
+      'Agent-driven migrations',
     ],
   },
   {
@@ -91,12 +93,12 @@ export const roles: Role[] = [
       { title: 'Software Development Engineer', dates: 'May 2022 - Oct 2024' },
     ],
     bullets: [
-      'Own marketplace search and discovery end-to-end: React/Next.js UI → .NET BFF → Java/Spring search services → Kubernetes/Octopus Deploy production.',
-      'Lead legacy-to-Next.js App Router migrations maintaining behavior parity; implement design systems with tokens; use URL-as-state for searchable, shareable UX.',
-      'Enforce contract-first frontend/backend integration: BFF handles transformations, UI consumes clean contracts, CI validates with automated contract tests.',
-      'Maintain quality during migration: Vitest/RTL unit tests first, Playwright for browser/BFF scenarios, coverage gates block regressions.',
-      'Build reusable AI-assisted engineering workflows (Cursor skills, MCP, agent loops) so teammates ship faster without lowering quality bar.',
-      'Earlier as SDE: delivered payments system integration ahead of schedule; maintained Spring Boot microservices and legacy Java/ASP monoliths; contributed to shared component library adopted in modern Next.js/TypeScript UI.',
+      'Led first full-system agent-powered migration at company: rewrote entire Classic ASP application to Next.js frontend + .NET BFF backend using Cursor, establishing patterns for AI-native development that teams now follow.',
+      'Pioneered cloud agent usage in early adoption phase: created custom Cursor skills, rules, and cloud environments against company codebase; built repeatable agentic workflows that enable teammates to ship production changes faster.',
+      'Built personal multi-agent systems for life operations used daily; architected AI workers on Cloudflare; combined deep prompt engineering with editor-native agent loops to automate complex software tasks end-to-end.',
+      'Own marketplace search and discovery stack: React/Next.js UI → .NET BFF → Java/Spring search services → Kubernetes production. Lead App Router migrations with behavior parity, design system integration, URL-as-state UX.',
+      'Enforce contract-first integration and quality gates: BFF transformations, OpenAPI contracts, automated contract tests in CI, Vitest unit coverage, Playwright browser scenarios—maintained throughout legacy-to-modern transitions.',
+      'Earlier as SDE: delivered payments integration ahead of schedule; maintained Spring Boot microservices and legacy Java/ASP monoliths; contributed shared components adopted across modern TypeScript UI.',
     ],
   },
   {
