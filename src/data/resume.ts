@@ -6,7 +6,7 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/trevor-baily24',
   linkedinLabel: 'linkedin.com/in/trevor-baily24',
   headline:
-    'AI-native engineer who ships production systems with agents. I led the first full-system Cursor-powered migration of a legacy codebase to modern Next.js, pioneered cloud agent workflows against enterprise repos, and build personal multi-agent systems used daily. I combine deep agentic engineering with end-to-end delivery—React frontends through backend services to Kubernetes production.',
+    'AI-native engineer who ships production systems with agents. I led the first full-system Cursor-powered migration of a legacy codebase to modern Next.js, pioneered cloud agent workflows against enterprise repos, and build personal multi-agent systems used daily. I own the full stack from React frontends through backend services to Kubernetes production, and I bring an agentic-first approach to all of it.',
   support:
     'Proven: rewrote Classic ASP monolith to Next.js + .NET BFF entirely with Cursor; early adopter of cloud agents and environments; built AI workers on Cloudflare. Daily tools: React/Next.js, TypeScript, .NET, Java/Spring Boot, Cursor skills/rules, MCP, agent loops.',
 }
@@ -94,10 +94,10 @@ export const roles: Role[] = [
     ],
     bullets: [
       'Led first full-system agent-powered migration at company: rewrote entire Classic ASP application to Next.js frontend + .NET BFF backend using Cursor, establishing patterns for AI-native development that teams now follow.',
-      'Pioneered cloud agent usage in early adoption phase: created custom Cursor skills, rules, and cloud environments against company codebase; built repeatable agentic workflows that enable teammates to ship production changes faster.',
-      'Built personal multi-agent systems for life operations used daily; architected AI workers on Cloudflare; combined deep prompt engineering with editor-native agent loops to automate complex software tasks end-to-end.',
+      'Pioneered cloud agent usage in early adoption phase: created custom Cursor skills, rules, and cloud environments against company codebase. Built repeatable agentic workflows that teammates use to ship production changes faster.',
+      'Outside of work, build and use personal multi-agent systems for life operations daily, plus AI workers on Cloudflare. This hands-on agentic development directly informs the editor-native agent loops and prompt engineering patterns I bring to the team.',
       'Own marketplace search and discovery stack: React/Next.js UI → .NET BFF → Java/Spring search services → Kubernetes production. Lead App Router migrations with behavior parity, design system integration, URL-as-state UX.',
-      'Enforce contract-first integration and quality gates: BFF transformations, OpenAPI contracts, automated contract tests in CI, Vitest unit coverage, Playwright browser scenarios—maintained throughout legacy-to-modern transitions.',
+      'Enforce contract-first integration and quality gates: BFF transformations, OpenAPI contracts, automated contract tests in CI, Vitest unit coverage, Playwright browser scenarios. Maintained throughout legacy-to-modern transitions.',
       'Earlier as SDE: delivered payments integration ahead of schedule; maintained Spring Boot microservices and legacy Java/ASP monoliths; contributed shared components adopted across modern TypeScript UI.',
     ],
   },
@@ -106,7 +106,7 @@ export const roles: Role[] = [
     location: '',
     titles: [{ title: 'Senior Frontend Developer', dates: 'Jul 2017 - May 2022' }],
     bullets: [
-      'Modernized frontend of 1.5M+ LOC enterprise monolith with Vue.js, Vuetify, Tailwind, and Pinia—clearer UX and measurably faster page loads.',
+      'Modernized frontend of 1.5M+ LOC enterprise monolith with Vue.js, Vuetify, Tailwind, and Pinia. Clearer UX and measurably faster page loads.',
       'As sole frontend engineer, shipped a state-based product from idea to production in under six months, including requirements and design.',
       'Led Struts 1 to Struts 2 migration as PM and developer with minimal knowledge transfer; rolled out to all clients on time and under budget.',
       'Migrated dependency management from manual ANT builds to Maven, including security reviews and library upgrades.',
