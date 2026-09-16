@@ -6,9 +6,9 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/trevor-baily24',
   linkedinLabel: 'linkedin.com/in/trevor-baily24',
   headline:
-    'Omaha-based senior engineer. I use AI tooling so I can take on more of the work myself, and I help the team move faster without cutting corners.',
+    'AI-first senior engineer who ships with agents by default — Cursor migrations, cloud agent environments, skills and rules teams reuse. I run personal multi-agent systems daily. Omaha.',
   support:
-    'Most days that means React, TypeScript, and Vite, owning the path from the UI through the BFF, search, and production. I also build Cursor skills, MCP setups, and cloud agent environments the team can reuse.',
+    'React/Next.js through .NET BFFs to Java/Spring on Kubernetes. I used Cursor to rewrite Classic ASP into a production Next.js app. Early with cloud agents against company repos. Contract-first, Vitest coverage gates, quality stays up while agents move fast.',
 }
 
 export const skillGroups = [
@@ -91,10 +91,11 @@ export const roles: Role[] = [
       { title: 'Software Development Engineer', dates: 'May 2022 - Oct 2024' },
     ],
     bullets: [
-      'I work across a lot of the stack: React/Next.js, .NET BFFs, Java/Spring, Kubernetes. I own the path from the UI through the BFF and search services to production.',
-      'I push for agentic development on the team: Cursor skills, MCP, and agent workflows people can reuse, plus cloud agent environments against the company codebase.',
-      'On a large legacy consolidation, I helped rewrite Classic ASP into a Next.js frontend and .NET BFF using Cursor, and I stay close to stakeholders on it.',
-      'Earlier as SDE: performance testing and legacy maintenance; shipped the payments system against existing internal services; kept Spring Boot microservices and Classic ASP/Java monoliths running; contributed to a shared component library now used in the Next.js/TypeScript UI.',
+      'Used Cursor to rewrite a Classic ASP frontend into Next.js App Router plus .NET BFF — full production system, not a demo. Contract-first OpenAPI, behavior parity migrations, stakeholder checkpoints.',
+      'Stood up cloud agent environments against company repos early. Built Cursor skills and rules the team reuses. Run personal multi-agent systems daily for life ops. Ship AI workers on Cloudflare.',
+      'Own search and discovery stack: React/Next.js UI → .NET BFF → Java/Spring search services → Elasticsearch on Kubernetes. App Router migrations with full behavior parity.',
+      'Quality: Vitest-first, Playwright where it matters, coverage gates enforce minimums. Agents move fast, quality stays up.',
+      'Earlier as SDE: shipped payments system ahead of schedule against internal services. Spring Boot microservices, legacy Java/ASP maintenance. Contributed shared components into the modern TypeScript UI.',
     ],
   },
   {
@@ -102,11 +103,11 @@ export const roles: Role[] = [
     location: '',
     titles: [{ title: 'Senior Frontend Developer', dates: 'Jul 2017 - May 2022' }],
     bullets: [
-      'Modernized the frontend of a large enterprise monolith (1.5M+ LOC) with Vue.js, Vuetify, Tailwind, and Pinia. Clearer UX, and the pages actually loaded faster.',
-      'Was the sole frontend engineer who took a state-based product from idea to production in under six months, including requirements and design.',
-      'Led a Struts 1 to Struts 2 migration as both PM and developer with thin knowledge transfer, and rolled it out to all clients on time and under budget.',
-      'Moved dependency management from manual ANT builds to Maven, including security reviews and library upgrades.',
-      'Built the consumer-facing web presence that helped grow exposure and support acquisition of the product, and added JasperSoft / HighCharts for embedded reporting.',
+      'Modernized frontend of a large enterprise monolith (1.5M+ LOC) with Vue.js, Vuetify, Tailwind, Pinia. Clearer UX, faster page loads.',
+      'Sole frontend engineer — shipped a state-based product from idea to production in under six months, including requirements and design.',
+      'Led Struts 1 → Struts 2 migration as PM and developer with thin knowledge transfer. Rolled out to all clients on time, under budget.',
+      'Moved dependency management from manual ANT builds to Maven. Security reviews, library upgrades.',
+      'Built consumer-facing web presence that helped grow exposure and support acquisition. Added JasperSoft / HighCharts for embedded reporting.',
     ],
   },
 ]
