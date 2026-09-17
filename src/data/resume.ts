@@ -6,9 +6,9 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/trevor-baily24',
   linkedinLabel: 'linkedin.com/in/trevor-baily24',
   headline:
-    'Lead-ready AI-native engineer focused on agentic development and production migrations. Ships Cursor-driven full-stack rewrites, cloud agent environments, and reusable skills and rules. Builds and runs Grok Bot and personal multi-agent systems guiding daily life and production work. Based in Omaha.',
+    'AI-native engineer shipping agentic development and production migrations. Cursor-driven full-stack rewrites, cloud agent environments, reusable skills and rules teammates use in production. Runs Grok Bot and multi-agent systems in production. Based in Omaha.',
   support:
-    'React and Next.js through .NET BFFs to Java and Spring on Kubernetes. Led Classic ASP to Next.js App Router migration with Cursor agent workflows. Built cloud agent environments and skills/rules for team adoption. Co-founded software consulting with HIPAA-aware healthcare delivery. Contract-first APIs and test coverage that keep agent-assisted delivery reliable.',
+    'React and Next.js through .NET BFFs to Java and Spring on Kubernetes. Migrated Classic ASP monolith to Next.js App Router using Cursor agents (OpenAPI contracts, behavior parity, stakeholder sync). Built cloud agent environments and skills/rules teammates adopted across company repos. Co-founded software consulting with HIPAA-aware healthcare delivery through beta and production. Contract-first APIs and test coverage that keep agent-assisted delivery reliable.',
 }
 
 export const skillGroups = [
@@ -92,11 +92,12 @@ export const roles: Role[] = [
       { title: 'Software Development Engineer', dates: 'May 2022 - Oct 2024' },
     ],
     bullets: [
-      'Migrated Classic ASP frontend to Next.js App Router with .NET BFF using Cursor agents. OpenAPI contracts, behavior parity testing, and regular stakeholder sync throughout.',
-      'Built cloud agent environments for company repos. Created reusable Cursor skills and rules the team can adopt. Run Grok Bot and multi-agent systems in production for life ops and personal automation. Shipped Cloudflare AI workers.',
-      'Own search and discovery: React/Next.js UI, .NET BFF, Java/Spring search services, and Elasticsearch on Kubernetes. App Router migrations with full behavior parity.',
-      'Quality systems for AI-assisted development. Vitest-first testing, strategic Playwright coverage, enforced minimum coverage gates.',
-      'Earlier as SDE: shipped the payments system ahead of schedule. Maintained Spring Boot microservices and legacy Java/ASP. Contributed components to the modern TypeScript UI library.',
+      'Migrated user-facing Classic ASP frontend (legacy monolith) to Next.js App Router + .NET BFF end-to-end using Cursor agents. Problem: brittle ASP with no contracts. Approach: OpenAPI-first contracts, behavior parity test suite, stakeholder sync cadence. Result: shipped migration with full parity and cleaner maintainability.',
+      'Built cloud agent environments and reusable Cursor skills/rules for company repos. Teammates now use these skills and rules in their agent workflows across the organization.',
+      'Run Grok Bot in production (multi-agent system proving agentic patterns in real-world use). Shipped Cloudflare AI workers.',
+      'Own search and discovery: React/Next.js UI, .NET BFF, Java/Spring search services, Elasticsearch on Kubernetes. App Router migrations with behavior parity.',
+      'Quality systems for AI-assisted development. Vitest-first testing, strategic Playwright coverage, minimum coverage gates.',
+      'Earlier as SDE: shipped payments system ahead of schedule. Maintained Spring Boot microservices and legacy Java/ASP. Contributed components to TypeScript UI library.',
     ],
   },
   {
@@ -104,9 +105,9 @@ export const roles: Role[] = [
     location: 'Omaha, NE',
     titles: [{ title: 'Co-Founder / Software Consultant', dates: '2023 - Present' }],
     bullets: [
-      'Partner software consulting with Jordan Schall and Chris Giitter. Client work across HIPAA-aware healthcare and pharma tech delivery.',
-      'Led full-stack development for Karry Labs (pharma/healthcare client): pharmacy and ointment prescription flows, patient portals, and AWS-backed systems through beta delivery.',
-      'Saw complete business and product lifecycle with pharma clients. Discovery through delivery, stakeholder cadence, production systems in regulated healthcare software environments.',
+      'Partner software consulting with Jordan Schall and Chris Giitter. Full lifecycle client work in HIPAA-aware healthcare and pharma tech.',
+      'Led full-stack development for Karry Labs (pharma client) through beta delivery: pharmacy and prescription flows, patient portals, AWS-backed systems in regulated healthcare software environment.',
+      'Complete business and product lifecycle experience. Discovery through production delivery, stakeholder cadence, shipping in regulated context.',
     ],
   },
   {
