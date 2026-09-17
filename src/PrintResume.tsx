@@ -39,7 +39,7 @@ export function PrintResume() {
                 <h3>
                   {role.company}
                   {role.location ? (
-                    <span className="location"> — {role.location}</span>
+                    <span className="location"> · {role.location}</span>
                   ) : null}
                 </h3>
               </div>
