@@ -6,9 +6,9 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/trevor-baily24',
   linkedinLabel: 'linkedin.com/in/trevor-baily24',
   headline:
-    'Omaha-based senior engineer. I use AI tooling to maximize my impact as an individual contributor and help teams ship faster without cutting corners.',
+    'Lead-ready AI-native engineer focused on agentic development and production migrations. Ships Cursor-driven full-stack rewrites, cloud agent environments, and reusable skills and rules. Runs multi-agent systems in daily production use. Based in Omaha.',
   support:
-    'Most days: React, TypeScript, and Vite. I own the path from UI through BFF, search, and production deployments.',
+    'React and Next.js through .NET BFFs to Java and Spring on Kubernetes. Led Classic ASP to Next.js App Router migration with Cursor agent workflows. Built cloud agent environments and skills/rules for team adoption. Contract-first APIs and test coverage that keep agent-assisted delivery reliable.',
 }
 
 export const skillGroups = [

@@ -31,6 +31,8 @@ await new Promise((resolve, reject) => {
     [
       '--headless=new',
       '--disable-gpu',
+      '--no-sandbox',
+      '--user-data-dir=/tmp/chrome-data',
       '--no-pdf-header-footer',
       '--virtual-time-budget=10000',
       `--print-to-pdf=${outputPdf}`,
