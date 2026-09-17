@@ -39,7 +39,7 @@ export function PrintResume() {
                 <h3>
                   {role.company}
                   {role.location ? (
-                    <span className="location"> — {role.location}</span>
+                    <span className="location"> · {role.location}</span>
                   ) : null}
                 </h3>
               </div>
@@ -80,8 +80,8 @@ const printStyles = `
     background: #fff;
     color: #111;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 10.5pt;
-    line-height: 1.35;
+    font-size: 10pt;
+    line-height: 1.32;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -94,12 +94,12 @@ const printStyles = `
   .resume {
     max-width: 8.5in;
     margin: 0 auto;
-    padding: 0.55in 0.65in;
+    padding: 0.4in 0.55in;
   }
 
   .resume-header {
-    margin-bottom: 0.85rem;
-    padding-bottom: 0.65rem;
+    margin-bottom: 0.65rem;
+    padding-bottom: 0.45rem;
     border-bottom: 1.5px solid #222;
   }
 
@@ -124,7 +124,7 @@ const printStyles = `
   }
 
   section {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.55rem;
   }
 
   h2 {

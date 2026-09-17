@@ -6,9 +6,9 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/trevor-baily24',
   linkedinLabel: 'linkedin.com/in/trevor-baily24',
   headline:
-    'Omaha-based senior engineer. I leverage AI tooling to help push the limits on how impactful of an individual contributor I can be. I help teams move faster without cutting corners in the process.',
+    'Lead-ready AI-native engineer focused on agentic development and production migrations. Ships Cursor-driven full-stack rewrites, cloud agent environments, and reusable skills and rules. Builds and runs Grok Bot and personal multi-agent systems guiding daily life and production work. Based in Omaha.',
   support:
-    'Most days that means React, TypeScript, and Vite, owning the path from the UI through the BFF, search, and production.',
+    'React and Next.js through .NET BFFs to Java and Spring on Kubernetes. Led Classic ASP to Next.js App Router migration with Cursor agent workflows. Built cloud agent environments and skills/rules for team adoption. Co-founded software consulting with HIPAA-aware healthcare delivery. Contract-first APIs and test coverage that keep agent-assisted delivery reliable.',
 }
 
 export const skillGroups = [
@@ -55,12 +55,13 @@ export const skillGroups = [
     ],
   },
   {
-    label: 'AI-assisted engineering',
+    label: 'AI-assisted engineering / Personal agents',
     items: [
       'Cloud Agent Automations',
       'Cursor skills/rules',
       'MCP',
       'Agent workflows/loops',
+      'Grok Bot / daily life agents',
       'Knowledge graphs/tag libraries',
     ],
   },
@@ -91,12 +92,21 @@ export const roles: Role[] = [
       { title: 'Software Development Engineer', dates: 'May 2022 - Oct 2024' },
     ],
     bullets: [
-      'Effective individual contributor with a breadth of service ownership across many languages and stacks.',
-      'Push for and help adopt agentic development: AI tooling, skills, and orchestration patterns teams can reuse.',
-      'Pioneer AI automation workflows and agentic cloud environments with Cursor.',
-      'Strong communicator with stakeholders on a large legacy consolidation effort.',
-      'Earlier as SDE: helped stability initiatives with performance-based testing and legacy maintenance; shipped the ATG Payments system integrating with existing internal services.',
-      'Maintained an ecosystem of Spring Boot microservices and legacy Classic ASP / Java monoliths, and contributed to a custom component library adopted in a modern Next.js / TypeScript UI.',
+      'Migrated Classic ASP frontend to Next.js App Router with .NET BFF using Cursor agents. OpenAPI contracts, behavior parity testing, and regular stakeholder sync throughout.',
+      'Built cloud agent environments for company repos. Created reusable Cursor skills and rules the team can adopt. Run Grok Bot and multi-agent systems in production for life ops and personal automation. Shipped Cloudflare AI workers.',
+      'Own search and discovery: React/Next.js UI, .NET BFF, Java/Spring search services, and Elasticsearch on Kubernetes. App Router migrations with full behavior parity.',
+      'Quality systems for AI-assisted development. Vitest-first testing, strategic Playwright coverage, enforced minimum coverage gates.',
+      'Earlier as SDE: shipped the payments system ahead of schedule. Maintained Spring Boot microservices and legacy Java/ASP. Contributed components to the modern TypeScript UI library.',
+    ],
+  },
+  {
+    company: 'Novi Capitis LLC',
+    location: 'Omaha, NE',
+    titles: [{ title: 'Co-Founder / Software Consultant', dates: '2023 - Present' }],
+    bullets: [
+      'Partner software consulting with Jordan Schall and Chris Giitter. Client work across HIPAA-aware healthcare and pharma tech delivery.',
+      'Led full-stack development for Karry Labs (pharma/healthcare client): pharmacy and ointment prescription flows, patient portals, and AWS-backed systems through beta delivery.',
+      'Saw complete business and product lifecycle with pharma clients. Discovery through delivery, stakeholder cadence, production systems in regulated healthcare software environments.',
     ],
   },
   {
@@ -104,11 +114,11 @@ export const roles: Role[] = [
     location: '',
     titles: [{ title: 'Senior Frontend Developer', dates: 'Jul 2017 - May 2022' }],
     bullets: [
-      'Modernized the frontend of a large enterprise monolith (1.5M+ LOC) with Vue.js, Vuetify, Tailwind, and Pinia. Clearer UX, and the pages actually loaded faster.',
-      'Was the sole frontend engineer who took a state-based product from idea to production in under six months, including requirements and design.',
-      'Led a Struts 1 to Struts 2 migration as both PM and developer with thin knowledge transfer, and rolled it out to all clients on time and under budget.',
+      'Modernized the frontend of an enterprise monolith (1.5M+ LOC) with Vue.js, Vuetify, Tailwind, and Pinia. Clearer UX, and the pages actually loaded faster.',
+      'Sole frontend engineer on a state-based product from requirements to production in under six months.',
+      'Led Struts 1 to Struts 2 migration as both PM and lead developer with thin knowledge transfer. Rolled out to all clients on time and under budget.',
       'Moved dependency management from manual ANT builds to Maven, including security reviews and library upgrades.',
-      'Built the consumer-facing web presence that helped grow exposure and support acquisition of the product, and added JasperSoft / HighCharts for embedded reporting.',
+      'Built the consumer-facing web presence that helped grow exposure and support acquisition. Integrated JasperSoft and HighCharts for embedded reporting.',
     ],
   },
 ]
