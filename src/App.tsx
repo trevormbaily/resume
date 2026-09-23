@@ -245,6 +245,15 @@ export default function App() {
               >
                 {profile.phone}
               </a>
+              {' · '}
+              <a
+                className="text-foreground/80 transition-colors hover:text-[var(--accent-signal)]"
+                href={profile.resumeUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {profile.resumeUrlLabel}
+              </a>
             </p>
             <p>
               Built with{' '}

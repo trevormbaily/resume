@@ -15,6 +15,8 @@ export function PrintResume() {
             <a href={`tel:${profile.phone.replace(/\D/g, '')}`}>{profile.phone}</a>
             {' · '}
             <a href={profile.linkedin}>{profile.linkedinLabel}</a>
+            {' · '}
+            <a href={profile.resumeUrl}>{profile.resumeUrlLabel}</a>
           </p>
           <p className="summary">{profile.headline}</p>
         </header>
