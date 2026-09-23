@@ -5,6 +5,8 @@ export const profile = {
   email: 'tbaily24@hotmail.com',
   linkedin: 'https://www.linkedin.com/in/trevor-baily24',
   linkedinLabel: 'linkedin.com/in/trevor-baily24',
+  resumeUrl: 'https://trevormbaily.github.io/resume/',
+  resumeUrlLabel: 'trevormbaily.github.io/resume',
   headline:
     'AI-native engineer shipping agentic development and production migrations. Cursor-driven full-stack rewrites, cloud agent environments, reusable skills and rules teammates use in production. Runs Grok Bot and multi-agent systems in production. Based in Omaha.',
   support:
