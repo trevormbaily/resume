@@ -1,6 +1,12 @@
-import { education, profile, roles, skillGroups } from '@/data/resume'
+import { education, profile, roles, rolesWithoutNovi, skillGroups } from '@/data/resume'
 
-export function PrintResume() {
+export interface PrintResumeProps {
+  excludeNovi?: boolean
+}
+
+export function PrintResume({ excludeNovi = false }: PrintResumeProps) {
+  const displayRoles = excludeNovi ? rolesWithoutNovi : roles
+
   return (
     <>
       <style>{printStyles}</style>
@@ -35,7 +41,7 @@ export function PrintResume() {
 
         <section>
           <h2>Experience</h2>
-          {roles.map((role) => (
+          {displayRoles.map((role) => (
             <div key={role.company} className="role">
               <div className="role-heading">
                 <h3>
