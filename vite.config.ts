@@ -20,6 +20,7 @@ export default defineConfig({
       input: {
         main: path.resolve(rootDir, 'index.html'),
         print: path.resolve(rootDir, 'print.html'),
+        'print-no-novi': path.resolve(rootDir, 'print-no-novi.html'),
       },
     },
   },

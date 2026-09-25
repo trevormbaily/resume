@@ -132,3 +132,7 @@ export const education = {
   degree: 'Bachelor of Business Administration (B.B.A.), Finance',
   note: 'Husker alum. Learned software the long way, mentors and a lot of practice, then made it my career.',
 }
+
+export const rolesWithoutNovi = roles.filter(
+  (role) => role.company !== 'Novi Capitis LLC',
+)

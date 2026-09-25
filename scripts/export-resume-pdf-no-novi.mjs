@@ -7,7 +7,7 @@ import { preview } from 'vite'
 const rootDir = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.resolve(rootDir, '..')
 const outputDir = path.join(projectRoot, 'public')
-const outputPdf = path.join(outputDir, 'Trevor-Baily-Resume.pdf')
+const outputPdf = path.join(outputDir, 'Trevor-Baily-Resume-No-Novi.pdf')
 const chrome =
   process.env.CHROME_PATH ??
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
@@ -21,7 +21,7 @@ const server = await preview({
   },
 })
 
-const printUrl = 'http://127.0.0.1:4179/print.html'
+const printUrl = 'http://127.0.0.1:4179/print-no-novi.html'
 
 await mkdir(outputDir, { recursive: true })
 
